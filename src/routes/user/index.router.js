@@ -2,6 +2,7 @@ const indexUser = require("./user");
 const userListTest = require("./usertestlist.router");
 const userResult = require("./viewResult.router");
 const profileRoutes = require("./profile.router");
+const detailTest = require("./detailTest.router")
 const { isAuth } = require('../../middleware/auth.middleware')
 
 module.exports = (app) => {
@@ -9,4 +10,5 @@ module.exports = (app) => {
   app.use("/practice", isAuth, userListTest);
   app.use("/result", isAuth, userResult);
   app.use("/profile", isAuth, profileRoutes)
+  app.use("/detail", isAuth, detailTest)
 };

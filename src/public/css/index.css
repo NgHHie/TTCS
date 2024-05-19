@@ -69245,3 +69245,82 @@ label,
 }
 
 /* all icon font classes list here */
+
+/* responsive danh sách bài thi */
+.test-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.content-test-name {
+  color: #c32b2b;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.content-test-detail {
+  margin-top: 10px;
+  color: #6c757d;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-enter-test {
+  width: 130px;
+  font-size: 18px;
+  height: 50px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.col.text-center{
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+  .col-md-1 {
+    display: none;
+  }
+  .row.align-items-center{
+    display: flex;
+    justify-content: space-between;
+  }
+}
+/* responsive xem chi tiết bài thi đã làm */
+.btn-responsive{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.375rem 0.75rem;
+  box-sizing: border-box
+}
+@media (max-width: 768px){
+  .btn-responsive{
+    font-size: 0.875rem
+  }
+}
+@media (max-width: 576px){
+  .btn-responsive{
+    font-size: 0.75rem  
+  }
+}
+
+.sidebar-hidden {
+  display: none;
+}
+/* ẩn sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    display: block; /* Ensure the sidebar is displayed in mobile view initially */
+  }
+}

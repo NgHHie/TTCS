@@ -1,32 +1,36 @@
 include ../mixins/itemSlider.pug
-.sidebar( slide-bar-item )
+.sidebar(slide-bar-item).sidebar-close
   .sidebar-inner
     .sidebar-logo
-          .peers.ai-c.fxw-nw
-            .peer.peer-greed
-              a(class="sidebar-link td-n" href="/result")
-                .peers.ai-c.fxw-nw
-                  .peer
-                    .logo
-                      img(src="assets/static/images/logo.png" alt="")
-                  .peer.peer-greed
-                    h5.lh-1.mB-0.logo-text(name-admin)
-                      | 
-                      each char in "PTIT QUIZ"
-                        span(char)= char
-            .peer
-              .mobile-toggle.sidebar-toggle
-                a(href="" class="td-n")
-                  i(class="ti-arrow-circle-left")
+      .peers.ai-c.fxw-nw
+        .peer.peer-greed
+          a(class="sidebar-link td-n" href="/result")
+            .peers.ai-c.fxw-nw
+              .peer
+                .logo
+                  img(src="assets/static/images/logo.png" alt="")
+              .peer.peer-greed
+                h5.lh-1.mB-0.logo-text(name-admin)
+                  | 
+                  each char in "PTIT QUIZ"
+                    span(char)= char
+        .peer
+          .mobile-toggle.sidebar-toggle(onclick="toggleSidebar()")
+            i(class="ti-arrow-circle-left icon-close")
     ul.sidebar-menu.scrollable.pos-r
-        +item-arrow('Danh sách bài thi', 'ti-home c-red-500',
-            [
-                {title: 'Bài thi trắc nghiệm', href: '/practice/tn'},
-                
-            ])
-        +item-arrow('Kết quả', 'ti-harddrives c-red-500',
-            [
-                {title: 'Bài thi trắc nghiệm', href: '/result/tn'},
-                
-            ])
-       
+      +item-arrow('Danh sách bài thi', 'ti-home c-red-500',
+          [
+              {title: 'Bài thi trắc nghiệm', href: '/practice/tn'},
+              
+          ])
+      +item-arrow('Kết quả', 'ti-harddrives c-red-500',
+          [
+              {title: 'Bài thi trắc nghiệm', href: '/result/tn'},
+              
+          ])
+
+script.
+  function toggleSidebar() {
+    document.body.classList.toggle('is-collapsed');
+    document.body.classList.toggle('app');
+  }

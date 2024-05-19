@@ -1,14 +1,14 @@
 const { Sequelize } = require("sequelize");
 require('dotenv').config()
-const sequelize = new Sequelize("javasql2", "root", "1111", {
+const sequelize = new Sequelize("fashion-app11", "root", "123456789", {
   host: "localhost",
-  port: "3307",
+  port: "3306",
   dialect: "mysql",
 });
 const connection = async () => {
   try {
     await sequelize.authenticate();
-    //console.log("Connection has been established successfully.");
+    console.log("Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }

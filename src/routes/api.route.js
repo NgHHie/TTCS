@@ -37,7 +37,8 @@ const { getStatisticsHandler } = require("../controllers/statistic.controllers")
 const { isAuth, isAdmin } = require("../middleware/auth.middleware");
 const { codeSubmit } = require("../controllers/code.controller")
 
-const { saveMessageHandler, getMessageByRoomIdHandler, getMessageRoom } = require('../controllers/message.controller')
+const { saveMessageHandler, getMessageByRoomIdHandler, getMessageRoom } = require('../controllers/message.controller');
+const {addCommentHandler, getCommentsHandler, getReplyCommentHandler} = require("../controllers/comment.controller");
 
 //Guest
 
@@ -55,6 +56,12 @@ router.post('/save-message', saveMessageHandler)
 router.get('/get-message/:id', getMessageByRoomIdHandler)
 router.get('/get-room/', getMessageRoom)
 //User
+
+//Comment
+
+router.post('/comment/add',addCommentHandler);
+router.get('/comment/:id',getCommentsHandler);
+router.get('/comment/reply/:id',getReplyCommentHandler);
 
 //hiep
 router.get('/thi/:id', isAuth, getQuestionHandlernoAns)

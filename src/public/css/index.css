@@ -1055,7 +1055,7 @@ a.btn:hover {
 }
 
 .page-container {
-  min-height: 100vh;
+  height: 100vh;
   padding-left: 280px;
   transition: all 0.2s ease;
 }
@@ -69306,12 +69306,14 @@ label,
 }
 @media (max-width: 768px){
   .btn-responsive{
-    font-size: 0.875rem
+    font-size: 0.875rem;
+    align-items: center;
   }
 }
 @media (max-width: 576px){
   .btn-responsive{
-    font-size: 0.75rem  
+    font-size: 0.75rem;
+    align-items: center; 
   }
 }
 
@@ -69321,6 +69323,38 @@ label,
 /* ẩn sidebar */
 @media (max-width: 768px) {
   .sidebar {
-    display: block; /* Ensure the sidebar is displayed in mobile view initially */
+    display: block;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .title{
+    font-size: 0.875rem
+  }
+}
+
+
+/* responsive ô search */
+.row.align-items-center.justify-content-between.mb-6 {
+  display: flex;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+@media (max-width: 620px) {
+  .search-wrapper {
+    width: 100%;
+    margin-left: 1 rem;
+  }
+  
+  .search-wrapper input {
+    width: calc(100% - 6rem);
+  }
+  
+  .search-wrapper button {
+    width: 6rem;
   }
 }

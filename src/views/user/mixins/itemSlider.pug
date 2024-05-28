@@ -8,7 +8,7 @@ mixin item-arrow(title, icon, items, id)
         i.ti-angle-right
     ul.dropdown-menu
       each item in items
-        li
+        li(style='margin-left: 8px;')
           a.sidebar-link(href= item.href) #{item.title}
 mixin normal-item(title, icon, href, id)
   li.nav-item.mT-30(btn-nav-tag)

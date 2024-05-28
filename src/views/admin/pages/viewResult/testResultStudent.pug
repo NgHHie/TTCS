@@ -1,6 +1,6 @@
 extends ../../layout/default.pug
 include ../../mixins/pagination.pug
-
+//- kết quả chi tiết từng bài thi
 block main
   p.title(style="font-size:26px;font-weight:bold;") #{test.TenBaithi}
   .row.align-items-center.justify-content-between.mb-6
@@ -19,6 +19,7 @@ block main
       .search-wrapper.d-flex.align-items-center.ml-2
         input(type="text" class="form-control search-box" tim-kiem-stu placeholder="---Tìm kiếm---" value=keyword)
         button.btn.btn-light(btn-loc-stu) Lọc
+
   hr
   h5 Danh sách sinh viên
   if studentList == null || studentList.length == 0
@@ -41,4 +42,4 @@ block main
                 td #{student.Ten}
                 td #{student.Lop}
                 td
-                  a.btn.btn-primary( idStu = student.MSV btn-detail) Xem chi tiết
+                  a.btn.btn-primary.btn-responsive( idStu = student.MSV btn-detail) Xem chi tiết

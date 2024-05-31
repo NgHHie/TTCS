@@ -4,9 +4,9 @@ include ../../mixins/pagination.pug
 block main
   p.title(style="font-size:26px;font-weight:bold;") #{test.TenBaithi}
   .row.align-items-center.justify-content-between.mb-6
-    .d-flex.align-items-center
+    .d-flex.align-items-center.result-student-admin
       span.title Lớp:
-      .dropdown.ml-2
+      .dropdown.ml-2.margin-btn-all-admin
         button.btn.btn-primary.dropdown-toggle#dropdownButton(type='button' data-bs-toggle='dropdown')
           | #{className}
         ul.dropdown-menu
@@ -25,7 +25,7 @@ block main
   if studentList == null || studentList.length == 0
     p Không có dữ liệu
   else
-    table(class="table table-striped")
+    table.detail-test-id(class="table table-striped")
       thead
         tr
           th STT

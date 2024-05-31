@@ -17,6 +17,6 @@ mixin edit-student-popup
             div
                 label Mật khẩu
                 input(type='password', id='edit-password', name='password', required)
-            div
-                button.btn.cur-p.ptit-color.btn-color(onclick="finishEdit('edit-student')") Cập nhật
-                button.btn.cur-p.ptit-color.btn-color(type='button' onclick="closePopUp('edit-student')") Hủy
+            div.btn-new-student
+                button.btn.cur-p.ptit-color.btn-color.btn-responsive(onclick="finishEdit('edit-student')") Cập nhật
+                button.btn.cur-p.ptit-color.btn-color.btn-responsive(type='button' onclick="closePopUp('edit-student')") Hủy

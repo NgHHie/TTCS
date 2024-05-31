@@ -69268,11 +69268,8 @@ label,
 }
 
 .btn-enter-test {
-  width: 130px;
   font-size: 18px;
-  height: 50px;
   border-radius: 10px;
-  padding: 10px 20px;
   color: white;
   border: none;
   text-align: center;
@@ -69285,6 +69282,22 @@ label,
   justify-content: space-around;
 }
 
+@media (min-width: 900px) {
+  .btn-enter-test{
+    width: 130px;
+    height: 50px;
+    padding: 10px 20px;
+  }
+}
+
+@media (min-width: 740px) and (max-width: 899px) {
+  .btn-enter-test{
+    width: calc(130px - 5px);
+    height: calc(50px - 5px);
+    padding: calc(10px - 1px) calc(20px - 1px);
+  }
+}
+
 @media (max-width: 768px) {
   .col-md-1 {
     display: none;
@@ -69292,6 +69305,33 @@ label,
   .row.align-items-center{
     display: flex;
     justify-content: space-between;
+  }
+}
+@media (max-width: 576px){
+  .col-md-1{
+    display: none;
+  }
+  .content-test-name{
+    font-size: calc(1.2rem - 0.19rem);
+  }
+  .content-test-detail{
+    font-size: calc(0.9rem - 0.22rem);
+  }
+}
+
+@media (max-width: 500px) {
+  .detail-test{
+    display: none;
+  }
+}
+
+@media (max-width: 320px) {
+  .bt-test{
+    display: flex;
+    flex-direction: column;
+  }
+  .btn-enter-test{
+    margin-bottom: 5px;
   }
 }
 /* responsive xem chi tiết bài thi đã làm */
@@ -69302,18 +69342,30 @@ label,
   display: inline-block;
   max-width: 100%;
   padding: 0.375rem 0.75rem;
-  box-sizing: border-box
+  box-sizing: border-box;
+}
+@media (max-width: 960px){
+  .btn-responsive, .btn-enter-test{
+    display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    justify-content: center;
+  }
 }
 @media (max-width: 768px){
-  .btn-responsive{
+  .btn-responsive, .btn-enter-test{
+    display: flex;
     font-size: 0.875rem;
     align-items: center;
+    justify-content: center;
   }
 }
 @media (max-width: 576px){
-  .btn-responsive{
+  .btn-responsive, .btn-enter-test{
+    display: flex;
     font-size: 0.75rem;
     align-items: center; 
+    justify-content: center;
   }
 }
 
@@ -69344,17 +69396,375 @@ label,
   align-items: center;
   margin-left: 0.5rem;
 }
-@media (max-width: 620px) {
+@media (max-width: 960px) {
   .search-wrapper {
     width: 100%;
-    margin-left: 1 rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   
   .search-wrapper input {
-    width: calc(100% - 6rem);
+    width: calc(100% - 5rem);
   }
   
   .search-wrapper button {
-    width: 6rem;
+    width: 5rem;
+  }
+}
+@media (max-width: 549px) {
+  .search-colum{
+    flex-direction: column;
+  }
+  .search-btn-new{
+    align-self: flex-end;
+    margin-top: 5px;
+    width: 5rem;
+  }
+  .search-wrapper input {
+    margin-left: 0px;
+    width: calc(100% - 5rem);
+  }
+  
+  .search-wrapper button {
+    width: 5rem;
+  }
+}
+
+/* search trang danh kết quả sinh viên admin */
+@media (max-width: 485px){
+  .result-student-admin{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .margin-btn-all-admin{
+    margin-bottom: 5px;
+  }
+}
+
+/* bảng xem chi tiết bên user */
+
+@media (max-width: 599px){
+  .table.table-striped.result-tn th:nth-child(1) {
+    display: none;
+  }
+  .table.table-striped.result-tn td:nth-child(1) {
+    display: none;
+  }
+  .table.table-striped.result-tn th{
+    font-size: 0.875rem;
+  }
+  .table.table-striped.result-tn td{
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 320px){
+  .table.table-striped.result-tn th:nth-child(3) {
+    display: none;
+  }
+  .table.table-striped.result-tn td:nth-child(3) {
+    display: none;
+  }
+}
+
+/* chi tiết bài thi, phần làm lại */
+
+@media (max-width: 413px){
+  .table.table-striped.detail-test-tn th{
+    font-size: 0.875rem;
+  }
+  .table.table-striped.detail-test-tn td{
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 320px){
+  .table.table-striped.detail-test-tn th{
+    font-size: 0.75rem;
+  }
+  .table.table-striped.detail-test-tn td{
+    font-size: 0.675rem;
+  }
+}
+
+/* css cho question.pug */
+@media (max-width: 374px){
+  .question p{
+    font-size: 1rem;
+  }
+}
+
+/* bảng top user dashboard admin */
+@media (max-width: 414px){
+  .top-user-admin th{
+    font-size: 1rem;
+  }
+  .top-user-admin td{
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 374px){
+  .top-user-admin th{
+    font-size: 0.75rem;
+  }
+  .top-user-admin td{
+    font-size: 0.675rem;
+  }
+}
+
+/* bảng danh sách bài thi admin */
+
+@media (max-width: 665px){
+  .table.table-test-admin>thead>tr th:nth-child(1){
+    display: none;
+  }
+  .table.table-test-admin>tbody>tr td:nth-child(1){
+    display: none;
+  }
+  .th-round-test>th {
+    font-size: 1rem;
+  }
+  .tb-round-test>td{
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 599px) {
+  .table.table-test-admin>thead>tr th:nth-child(1){
+    display: none;
+  }
+  .table.table-test-admin>tbody>tr td:nth-child(1){
+    display: none;
+  }
+  .table.table-test-admin>thead>tr th:nth-child(3){
+    display: none;
+  }
+  .table.table-test-admin>tbody>tr td:nth-child(3){
+    display: none;
+  }
+  .table.table-test-admin>thead>tr th:nth-child(4){
+    display: none;
+  }
+  .table.table-test-admin>tbody>tr td:nth-child(4){
+    display: none;
+  }
+}
+
+@media (max-width: 439px){
+  .table.table-test-admin>thead>tr th:nth-child(1){
+    display: none;
+  }
+  .table.table-test-admin>tbody>tr td:nth-child(1){
+    display: none;
+  }
+  .table.table-test-admin>thead>tr th:nth-child(3){
+    display: none;
+  }
+  .table.table-test-admin>tbody>tr td:nth-child(3){
+    display: none;
+  }
+  .table.table-test-admin>thead>tr th:nth-child(4){
+    display: none;
+  }
+  .table.table-test-admin>tbody>tr td:nth-child(4){
+    display: none;
+  }
+  /* .table.table-test-admin>thead>tr th:nth-child(5){
+    display: none;
+  }
+  .table.table-test-admin>tbody>tr td:nth-child(5){
+    display: none;
+  } */
+  .th-round-test>th:nth-child(6){
+    display: none;
+  }
+  .tb-round-test>td:nth-child(6){
+    display: none;
+  }
+  .th-round-test>th:nth-child(7){
+    display: none;
+  }
+  .tb-round-test>td:nth-child(7){
+    display: none;
+  }
+  .th-round-test>th:nth-child(8){
+    display: table-cell !important;
+  }
+  .tb-round-test>td:nth-child(8){
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* bảng danh sách tài khoản */
+@media (max-width: 905px){
+  .tb-round-account>th{
+    font-size: 1rem;
+  }
+  .th-round-account>td{
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 800px){
+  .tb-round-account>th:nth-child(4){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(4){
+    display: none;
+  }
+}
+@media (max-width: 610px) {
+  .tb-round-account>th:nth-child(4){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(4){
+    display: none;
+  }
+  .tb-round-account>th:nth-child(2){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(2){
+    display: none;
+  }
+}
+@media (max-width: 530px) {
+  .tb-round-account>th:nth-child(4){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(4){
+    display: none;
+  }
+  .tb-round-account>th:nth-child(2){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(2){
+    display: none;
+  }
+  .tb-round-account>th:nth-child(3){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(3){
+    display: none;
+  }
+}
+@media (max-width: 430px) {
+  .tb-round-account>th:nth-child(4){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(4){
+    display: none;
+  }
+  .tb-round-account>th:nth-child(2){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(2){
+    display: none;
+  }
+  .tb-round-account>th:nth-child(3){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(3){
+    display: none;
+  }
+  .tb-round-account>th:nth-child(5){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(5){
+    display: none;
+  }
+  .tb-round-account>th:nth-child(6){
+    display: none;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(6){
+    display: none;
+  }
+  .tb-round-account>th:nth-child(7){
+    display: flex !important;
+  }
+  .table.table-account-student>tbody>tr>td:nth-child(7){
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-put,.btn-delete{
+    width: 55px;
+    height: 33px;
+    margin-top: 2px;
+  }
+}
+
+/* responsive result-test-id */
+@media (max-width: 500px){
+  .detail-test-id>thead>tr>th:nth-child(1){
+    display: none;
+  }
+  .detail-test-id>tbody>tr>td:nth-child(1){
+    display: none;
+  }
+}
+
+@media (max-width: 450px){
+  .detail-test-id>thead>tr>th:nth-child(1){
+    display: none;
+  }
+  .detail-test-id>tbody>tr>td:nth-child(1){
+    display: none;
+  }
+  .detail-test-id>thead>tr>th:nth-child(3){
+    display: none;
+  }
+  .detail-test-id>tbody>tr>td:nth-child(3){
+    display: none;
+  }
+}
+@media (max-width: 370px){
+  .detail-test-id>thead>tr>th:nth-child(1){
+    display: none;
+  }
+  .detail-test-id>tbody>tr>td:nth-child(1){
+    display: none;
+  }
+  .detail-test-id>thead>tr>th:nth-child(3){
+    display: none;
+  }
+  .detail-test-id>tbody>tr>td:nth-child(3){
+    display: none;
+  }
+  .detail-test-id>thead>tr>th:nth-child(4){
+    display: none;
+  }
+  .detail-test-id>tbody>tr>td:nth-child(4){
+    display: none;
+  }
+}
+
+/* responsive result-student-msv */
+@media (max-width: 350px){
+  .table-result-student-msv>thead>tr>th:nth-child(1){
+    display:none;
+  }
+  .table-result-student-msv>tbody>tr>td:nth-child(1){
+    display:none;
+  }
+}
+
+/* responsive add new student */
+@media (max-width: 600px){
+  .add-new-student-container,.edit-student-container{
+    max-width: 100%;
+    max-height: auto;
+  }
+  .add-new-student-container h1,.edit-student-container h1{
+    font-size: 20px;
+  }
+  .btn-new-student{
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

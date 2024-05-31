@@ -159,10 +159,19 @@ td {
 
 
 
-@media (max-width < 991px) {
+@media (max-width: 991px) {
     .graphBox {
         grid-template-columns: 1fr;
         height: auto;
     }
+    .graphBox > :nth-child(2){
+        height: 200px;
+    }
 
 }
+@media (max-width: 600px) {
+    .cardBox-dashboard, .graphBox{
+      display: flex;
+      flex-direction: column;
+    }
+  }

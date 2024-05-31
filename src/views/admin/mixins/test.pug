@@ -12,16 +12,16 @@ mixin testMixin(test)
                     - var thang = testDate.getMonth() + 1 // Lưu ý: getMonth trả về giá trị từ 0 đến 11
                     - var nam = testDate.getFullYear()
                     .content-test-detail Bắt đầu: #{ngay}/#{thang}/#{nam}
-                .col.d-none.d-md-block
+                .col.detail-test
                     .content-test-detail Số Lượng Câu: #{test.SoLuongCau}
                     br
                     .content-test-detail Thời Gian: #{test.ThoiGianThi} phút
                 .col-1.text-center
                     if test.TrangThai == "Đóng"
-                        .alert.alert-secondary(role='alert' style = " display: flex;justify-content: center;align-items: center; background-color: #e0e5f0") Đóng
+                        .alert(role='alert' style = " display: flex;justify-content: center;align-items: center; margin-top: 13px") Đóng
                     else
-                        .alert.alert-success(role='alert' style = " display: flex;justify-content: center;align-items: center; background-color: #81d695") Mở
-                .col.text-center
+                        .alert(role='alert' style = " display: flex;justify-content: center;align-items: center; margin-top: 13px") Mở
+                .col.text-center.bt-test
                     a.btn.btn-primary.btn-enter-test(
-                        btn-detail-test idTest = test.MaBaiThi style="width: 130px; font-size: 16px; height: 50px; border-radius: 10px; padding: 10px 20px; color: white; border: none; text-align: center; text-decoration: none; display: inline-block;"
+                        btn-detail-test idTest = test.MaBaiThi style = "font-size: 15px;"
                     ) Xem chi tiết

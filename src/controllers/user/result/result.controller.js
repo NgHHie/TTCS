@@ -136,6 +136,7 @@ module.exports.testListForStudent = async (req, res) => {
     find[Op.or] = [
       { TenBaiThi: { [Op.regexp]: regexExpression } },
       { TheLoai: { [Op.regexp]: regexExpression } },
+      { TacGia: { [Op.regexp]: regexExpression } },
     ];
   }
   const count = await testServices.getCountTestListForStudentWithFindObject(
@@ -151,7 +152,7 @@ module.exports.testListForStudent = async (req, res) => {
   );
   const testListForStudent =
     await testServices.getTestListForStudentWithFindObject(find, pagination);
-  console.log(testListForStudent);
+  // console.log(testListForStudent);
   res.render("user/pages/test_list/testList.pug", {
     titlePage: "Danh sách bài thi",
     tests: testListForStudent.data,

@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const fileUploader = require('../../config/cloudinary.config');
 const controllerViewTest = require("../../controllers/admin/test/test.controller");
-const { isAdminPermission } = require("../../middleware/auth.middleware");
-// router.get("/", controllerViewTest.index);
-router.get("/new-test", isAdminPermission, controllerViewTest.createNewTest);
-router.get("/", controllerViewTest.testListPaginate);
-router.get("/edit-test/:id", controllerViewTest.EditTest);
 
-router.post('/cloudinary-upload', fileUploader.single('file'), (req, res, next) => {
-    console.log('oke con ga den')
+// router.get("/", controllerViewTest.index);
+router.get("/new-test", controllerViewTest.createNewTestUser);
+router.get("/", controllerViewTest.testListPaginateUser);
+// router.get("/edit-test/:id", controllerViewTest.EditTest);
+
+router.post('/cloudinary-upload1', fileUploader.single('file'), (req, res, next) => {
     if (!req.file) {
         next(new Error('No file uploaded!'));
         return;
@@ -21,6 +20,14 @@ router.post('/cloudinary-upload', fileUploader.single('file'), (req, res, next) 
     }
 
     res.status(200).json(response);
+});
+
+router.use((err, req, res, next) => {
+    console.error('lỗi:',err.stack);
+    res.status(500).send({
+        message: err.message,
+        error: err
+    });
 });
 
 module.exports = router;

@@ -1,16 +1,16 @@
 
 var currentNumber = 1;
-document.getElementById('fileOption').addEventListener('change', function () {
+// document.getElementById('fileOption').addEventListener('change', function () {
 
-    var fileOption = this.value;
-    var fileUpload = document.getElementById('fileUpload');
+//     var fileOption = this.value;
+//     var fileUpload = document.getElementById('fileUpload');
 
-    if (fileOption === 'upload') {
-        fileUpload.style.display = 'block';
-    } else {
-        fileUpload.style.display = 'none';
-    }
-});
+//     if (fileOption === 'upload') {
+//         fileUpload.style.display = 'block';
+//     } else {
+//         fileUpload.style.display = 'none';
+//     }
+// });
 
 
 function render() {
@@ -98,6 +98,84 @@ function render() {
         }
     }
 };
+
+function render2(questionsAndAnswers) {
+    var questionsContainer = document.getElementById('questionsContainer');
+  
+    // Xóa các câu hỏi cũ trước khi tạo mới
+    questionsContainer.innerHTML = '';
+  
+    // Tạo các ô input cho câu hỏi và đáp án từ mảng questionsAndAnswers
+    questionsAndAnswers.forEach((qna, index) => {
+      var i = index + 1;
+  
+      var questionContent = document.createElement('div');
+      questionContent.className = 'question-content';
+      questionContent.id = 'questionContent' + i;
+  
+      var questionDiv = document.createElement('div');
+      questionDiv.className = 'question-container';
+  
+      var questionTitle = document.createElement('div');
+      questionTitle.className = 'question-title';
+  
+      // Nút xóa câu hỏi
+      var deleteQuestionButton = document.createElement('div');
+      deleteQuestionButton.className = 'delete-question';
+  
+      var iconDelete = document.createElement('i');
+      iconDelete.className = 'ti-close';
+      deleteQuestionButton.appendChild(iconDelete);
+      deleteQuestionButton.onclick = function () {
+        DeleteQuestion(this.parentNode.parentNode.id);
+      };
+  
+      questionDiv.appendChild(deleteQuestionButton);
+  
+      // Nhãn và ô nhập câu hỏi
+      var questionLabel = document.createElement('label');
+      questionLabel.textContent = 'Câu hỏi ' + i + ':';
+  
+      var questionInput = document.createElement('textarea');
+      questionInput.cols = 140;
+      questionInput.rows = 3;
+      questionInput.id = 'question' + i;
+      questionInput.value = qna.question; // Điền câu hỏi vào ô input
+  
+      questionTitle.appendChild(questionLabel);
+      questionTitle.appendChild(questionInput);
+      questionDiv.appendChild(questionTitle);
+      questionContent.appendChild(questionDiv);
+  
+      // Tạo các ô input cho đáp án và checkbox cho đáp án đúng
+      for (var j = 0; j < 4; j++) {
+        var answerDiv = document.createElement('div');
+        answerDiv.className = 'answer-container';
+  
+        var answerCheckbox = document.createElement('div');
+        answerCheckbox.className = 'checkbox';
+        answerCheckbox.id = i + 'checkbox' + (j + 1);
+        answerCheckbox.onclick = function () {
+          toggleCheckbox(this.id);
+        };
+        answerCheckbox.textContent = String.fromCharCode('A'.charCodeAt(0) + j);
+  
+        var answerInput = document.createElement('textarea');
+        answerInput.cols = "140";
+        answerInput.rows = "1";
+        answerInput.name = 'question' + i + 'answer' + (j + 1);
+        answerInput.id = 'question' + i + 'answer' + (j + 1);
+        answerInput.value = qna.answers[j] || ''; // Điền đáp án vào ô input
+  
+        answerDiv.appendChild(answerCheckbox);
+        answerDiv.appendChild(answerInput);
+  
+        questionContent.appendChild(answerDiv);
+      }
+  
+      questionsContainer.appendChild(questionContent);
+    });
+  }
 
 
 
@@ -302,21 +380,55 @@ function showAlert(content) {
     setTimeout(hideAlert, 3000);
 }
 
-async function Save() {
-    var examDate = document.getElementById('examDate').value;
-    var examTime = document.getElementById('timeStart').value;
+function formatDatetime(date) {
+    // Chuyển đổi giờ UTC sang giờ Việt Nam (UTC+7)
+    const vietnamOffset = 7 * 60; // 7 giờ * 60 phút
+    const localDate = new Date(date.getTime() - vietnamOffset * 60 * 1000);
 
-    var examDateTime = examDate + 'T' + examTime;
+    const year = localDate.getFullYear();
+    const month = String(localDate.getMonth() + 1).padStart(2, '0');
+    const day = String(localDate.getDate()).padStart(2, '0');
+    const hours = String(localDate.getHours()).padStart(2, '0');
+    const minutes = String(localDate.getMinutes()).padStart(2, '0');
+    const seconds = String(localDate.getSeconds()).padStart(2, '0');
+    
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+async function uploadImageWithRetry(url, options, retries = 3, delay = 3000) {
+    for (let i = 0; i < retries; i++) {
+        try {
+            const response = await fetch(url, options);
+            if (response.ok) {
+                const data = await response.json();
+                return data;
+            } else {
+                throw new Error('Failed to upload image');
+            }
+        } catch (error) {
+            if (i === retries - 1) {
+                throw error; // Throw the error if it's the last retry
+            }
+            console.error(`Upload failed, retrying... (${i + 1}/${retries})`);
+            await new Promise(resolve => setTimeout(resolve, delay)); // Wait before retrying
+        }
+    }
+}
+
+async function Save() {
+    const currentDatetime = new Date();
+    const formattedDatetime = formatDatetime(currentDatetime);
 
     var formData = {
         examName: document.getElementById('examName').value,
-        examDateTime: examDateTime,
+        examDateTime: formattedDatetime,
         examTime: document.getElementById('examTime').value,
         numQuestions: document.getElementById('numQuestions').value,
-        imageUrl: "https://res.cloudinary.com/dyc1c2elf/image/upload/v1714894653/hpz5yqojda1ajpnrpkvv.jpg"
+        imageUrl: "https://res.cloudinary.com/dyc1c2elf/image/upload/v1714894653/hpz5yqojda1ajpnrpkvv.jpg",
+        examDescription: document.getElementById('examDescription').value
     };
 
-    if (!examDate || !examTime || !formData.numQuestions || !formData.examTime || !formData.examName) {
+    if (!formData.numQuestions || !formData.examTime || !formData.examName) {
         showAlert('Vui lòng điền đầy đủ thông tin cho bài thi');
         return;
     }
@@ -365,25 +477,27 @@ async function Save() {
     var newImageUrl = "https://res.cloudinary.com/dyc1c2elf/image/upload/v1714894653/hpz5yqojda1ajpnrpkvv.jpg";
     var fileInput = document.getElementById('image-file');
     var file = fileInput.files[0];
-
+    console.log(file)
     if (file) {
         var formImg = new FormData();
         formImg.append('file', file);
-
+        const url = '/test/cloudinary-upload1';
+        const options = {
+            method: 'POST',
+            body: formImg
+        };
         try {
-            const response = await fetch('/admin/test/cloudinary-upload', {
-                method: 'POST',
-                body: formImg
-            });
-            const data = await response.json();
-            newImageUrl = data.img_url;
+            var loading = document.getElementById('loading');
+            loading.style.display = 'block';
+            const data = await uploadImageWithRetry(url, options);
+            const newImageUrl = data.img_url;
+            console.log(newImageUrl);
+            formData.imageUrl = newImageUrl;
         } catch (error) {
             console.error('Error:', error);
+            // Xử lý lỗi, ví dụ: hiển thị thông báo lỗi cho người dùng
         }
     }
-
-    formData.imageUrl = newImageUrl;
-
     //console.log(newImageUrl)
 
     const backendURL = '/api/new-test';
@@ -404,7 +518,7 @@ async function Save() {
         const data = await response.json();
         hideLoading();
         //console.log('Dữ liệu đã được gửi thành công đến backend:', data);
-        window.location.href = "/admin/test";
+        window.location.href = "/test";
     } catch (error) {
         showAlert('Đã xảy ra lỗi !!!')
         console.error('Đã xảy ra lỗi khi gửi dữ liệu đến backend:', error);

@@ -19,6 +19,7 @@ html
     script(src='/js/chat.user.js')
     script(src='/js/loading.js')
     script(src='/js/float-chat.js')
+    
     style.
       #clickEffect {
         margin: -30px;
@@ -44,6 +45,10 @@ html
       include ../partials/nav-header.pug
       main(class='main-content bgc-grey-100')
         .main-container
+          .alert.alert-danger.alert-dismissible.fade.show#myAlert(role="alert")
+              button.close(data-dismiss="alert" aria-label="Close")
+                span(aria-hidden="true") &times;
+              span#alertContent
           block main
           #clickEffect.hiep
    
@@ -86,6 +91,7 @@ html
 
 
       }
+    script(src="/js/upload-test.js")
     script(src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js")
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js")

@@ -1,10 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "123456789",
-    "database": "fashion-app11",
+    "password": "1111",
+    "database": "javasql2",
     "host": "127.0.0.1",
-    "port": "3306",
+    "port": "3307",
     "dialect": "mysql"
   },
   "test": {

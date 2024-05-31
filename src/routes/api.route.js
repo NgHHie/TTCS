@@ -44,7 +44,7 @@ const {addCommentHandler, getCommentsHandler, getReplyCommentHandler} = require(
 
 router.post("/login/:role", checkLoginUser);
 router.post("/createNewstudent", createNewStudentHandler);
-router.post('/new-test', postTestHandler)
+router.post('/new-test', isAuth, postTestHandler)
 router.delete('/delete-test/:id', deleteTestHandler)
 router.post('/new-student', postStudentHandler)
 router.delete('/delete-student/:id', deleteStudentHandler)
@@ -52,9 +52,7 @@ router.put('/update-test/:id', updateTestHandler)
 router.get('/get-student/:id', getStudentByIdHandler)
 router.put('/update-student/:id', updateStudentHandler)
 router.put('/update-profile-student/:id', updateStudentHandler2)
-router.post('/save-message', saveMessageHandler)
-router.get('/get-message/:id', getMessageByRoomIdHandler)
-router.get('/get-room/', getMessageRoom)
+
 //User
 
 //Comment

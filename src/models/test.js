@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Test.hasMany(models.Question, { foreignKey: "MaBaiThi" });
       Test.hasMany(models.Result, { foreignKey: "MaBaiThi" });
+      Test.belongsTo(models.Student, { foreignKey: 'TacGia', targetKey: 'MSV'});
     }
   }
   Test.init(
@@ -26,6 +27,9 @@ module.exports = (sequelize, DataTypes) => {
       TheLoai: DataTypes.STRING,
       TrangThai: DataTypes.STRING,
       img_url: DataTypes.STRING,
+      TacGia: {
+        type: DataTypes.STRING,
+      }
     },
     {
       // options

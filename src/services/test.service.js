@@ -102,9 +102,10 @@ const createNewTest = async (test, questionList) => {
         ThoiGianBatDau: test.examDateTime,
         ThoiGianThi: parseInt(test.examTime),
         SoLuongCau: parseInt(questionList.length),
-        TheLoai: "Trắc nghiệm",
+        TheLoai: test.examDescription,
         TrangThai: "Đóng",
         img_url: test.imageUrl,
+        TacGia: test.TacGia,
       }
       // { transaction: t }
     );
@@ -310,6 +311,34 @@ const getTestWithFindObject = async (find, pagination) => {
     return data;
   }
 };
+const getTestWithFindObjectUser = async (find, msv,  pagination) => {
+  const data = { status: null, data: null };
+  // //console.log(pagination.limit, pagination.offset);
+  // //console.log(find);
+  try {
+    const tests = await db.Test.findAll({
+      where: {
+        ...find,
+        TacGia: msv
+      },
+      limit: pagination.limitedItem,
+      offset: pagination.limitedItem * (pagination.currentPage - 1),
+      raw: true,
+      order: [['ThoiGianBatDau', 'DESC']],
+    });
+    if (tests.length > 0) {
+      data.status = 200;
+      data.data = tests;
+    } else {
+      data.status = 404;
+    }
+    return data;
+  } catch (error) {
+    console.error("Lỗi khi truy vấn dữ liệu:", error);
+    data.status = 500;
+    return data;
+  }
+};
 const getIdTestWithDate = async (ngay) => {
   try {
     const listId = await db.Test.findAll({
@@ -341,6 +370,31 @@ const getCountTestWithFindObject = async (find) => {
     const tests = await db.Test.findAll({
       raw: true,
       where: find,
+    });
+    if (tests.length > 0) {
+      data.status = 200;
+      data.data = tests;
+    } else {
+      data.status = 404;
+    }
+    return data;
+  } catch (error) {
+    console.error("Lỗi khi truy vấn dữ liệu:", error);
+    data.status = 500;
+    return data;
+    return listId;
+  }
+};
+
+const getCountTestWithFindObjectUser = async (find, msv) => {
+  const data = { status: null, data: null };
+  try {
+    const tests = await db.Test.findAll({
+      raw: true,
+      where: {
+        ...find,
+        TacGia: msv
+      },
     });
     if (tests.length > 0) {
       data.status = 200;
@@ -524,6 +578,7 @@ const getCountTestListForStudentWithFindObject = async (find) => {
     const tests = await db.Test.findAll({
       raw: true,
       where: find,
+      // order: [[db.Test, 'ThoiGianNopBai', 'DESC']],
     });
     if (tests.length > 0) {
       data.status = 200;
@@ -547,14 +602,46 @@ const getTestListForStudentWithFindObject = async (find, pagination) => {
       limit: pagination.limitedItem,
       offset: pagination.limitedItem * (pagination.currentPage - 1),
       raw: true,
+      order: [['ThoiGianBatDau', 'DESC']],
     });
-    console.log(tests);
+
     if (tests.length > 0) {
+      // Lấy mã bài thi từ danh sách tests
+      const testIds = tests.map(test => test.MaBaiThi);
+      
+      // Tạo mảng các promises cho các truy vấn đếm
+      const testCountPromises = testIds.map(testId => {
+        return db.Result.findOne({
+          attributes: [
+            'MaBaiThi',
+            [sequelize.fn('COUNT', sequelize.col('MaBaiThi')), 'count']
+          ],
+          where: {
+            MaBaiThi: testId
+          },
+          raw: true,
+        });
+      });
+
+      // Chờ cho tất cả các promises hoàn thành và lấy kết quả
+      const testCounts = await Promise.all(testCountPromises);
+
+      // Gộp kết quả đếm vào danh sách bài thi
+      const testsWithCounts = tests.map(test => {
+        const countInfo = testCounts.find(tc => tc && tc.MaBaiThi === test.MaBaiThi);
+
+        return {
+          ...test,
+          count: countInfo ? countInfo.count : 0
+        };
+      });
+
       data.status = 200;
-      data.data = tests;
+      data.data = testsWithCounts;
     } else {
       data.status = 404;
     }
+    console.log(data)
     return data;
   } catch (error) {
     console.error("Lỗi khi truy vấn dữ liệu:", error);
@@ -562,6 +649,7 @@ const getTestListForStudentWithFindObject = async (find, pagination) => {
     return data;
   }
 };
+
 
 module.exports = {
   getAllTest,
@@ -583,4 +671,6 @@ module.exports = {
   getSubmitByStudentIdWithPage,
   getSubmitByStudentId,
   getURL,
+  getCountTestWithFindObjectUser,
+  getTestWithFindObjectUser
 };

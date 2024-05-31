@@ -12,7 +12,7 @@ const dashboardRouter = require("./dashboard.router"); const errorRouter = requi
 const { isAdminPermission } = require("../../middleware/auth.middleware");
 module.exports = (app) => {
   app.use("/admin/result", viewResultRoutes);
-  app.use("/admin/test", isAdminPermission, testListRoutes);
+  app.use("/admin/test", testListRoutes);
   app.use("/admin/account", isAdminPermission, accountManageRoutes);
   app.use("/admin/profile", profileRoutes);
   app.use("/admin/statistic", isAdminPermission, statisticRouter);

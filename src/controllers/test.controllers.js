@@ -258,7 +258,10 @@ const postTestHandler = async (req, res) => {
   //console.log(reqBody)
   var test = reqBody.metadata;
   var questionList = reqBody.data;
-
+  console.log(req.jwtDecoded)
+  let msv = req.jwtDecoded.data.id;
+  
+  test.TacGia = msv;
   // //console.log(test)
   // //console.log(questionList)
   var status = await createNewTest(test, questionList)

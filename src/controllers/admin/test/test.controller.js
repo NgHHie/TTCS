@@ -1,5 +1,5 @@
 // const { param } = require('../../../../routes/api.route');
-const { getTestById, getCountTestWithFindObject, getTestWithFindObject } = require('../../../services/test.service');
+const { getTestById, getCountTestWithFindObject, getTestWithFindObject, getCountTestWithFindObjectUser, getTestWithFindObjectUser } = require('../../../services/test.service');
 // const { getQuestionOfTest } = require('../../../routes/api.route');
 const paginationHelper = require('../../../helpers/paginationHelper');
 const { Op } = require('sequelize');
@@ -62,6 +62,13 @@ const createNewTest = async (req, res) => {
     });
 }
 
+const createNewTestUser = async (req, res) => {
+
+    res.render("user/pages/viewTest/newTest.pug", {
+        titlePage: "Tạo mới bài thi"
+    });
+}
+
 const EditTest = async (req, res) => {
     const testId = req.params.id;
     // //console.log("id: ", testId);
@@ -91,5 +98,56 @@ const EditTest = async (req, res) => {
 }
 
 
-module.exports = { createNewTest, EditTest, testListPaginate }
+const testListPaginateUser = async (req, res) => {
+    let msv = req.jwtDecoded.data.id;
+    console.log(msv)
+    const find = {};
+    const ten = req.query.name;
+    if (ten) {
+        find.Ten = ten;
+    }
+
+
+    if (req.query.keyword) {
+        const regexExpression = new RegExp(req.query.keyword, "i").source;
+        find[Op.or] = [
+            { TenBaithi: { [Op.regexp]: regexExpression } },
+            { MaBaiThi: { [Op.regexp]: regexExpression } },
+        ];
+    }
+
+    // //console.log(find);
+    const count = await getCountTestWithFindObjectUser(find, msv);
+    const pagination = paginationHelper(
+        {
+            currentPage: 1,
+            limitedItem: 5,
+        },
+        req.query,
+        count.data.length
+    );
+    const testList = await getTestWithFindObjectUser(
+        find, msv,
+        pagination
+    );
+
+    var data = testList.data;
+
+    // //console.log(data);
+    for (var i = 0; i < data.length; i++) {
+        var y = data[i].ThoiGianBatDau;
+        var timeFormat = new Date(y)
+        data[i].ThoiGianBatDau = timeFormat.toLocaleString()
+    }
+
+    res.render("user/pages/viewTest/index.pug", {
+        titlePage: "Danh sách bài thi",
+        className: ten || "Tất cả",
+        tests: data,
+        pagination: pagination,
+        keyword: req.query.keyword || "",
+    });
+}
+
+module.exports = { createNewTest, createNewTestUser, EditTest, testListPaginate, testListPaginateUser }
 

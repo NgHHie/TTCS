@@ -2,6 +2,7 @@
 doctype html
 html
   head
+    meta(name='viewport', content='width=device-width,initial-scale=1')
     title #{titlePage}
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css")
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css")
@@ -10,7 +11,7 @@ html
     link(rel="stylesheet", href="/css/edit-test.css")
     link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700")
     //- link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css')
-    link(rel='stylesheet', href='/css/float-chat.css')
+
     
     link(rel='stylesheet', href='/css/loading.css')
     link(rel='stylesheet', href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
@@ -18,7 +19,7 @@ html
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js')
     script(src='/js/chat.user.js')
     script(src='/js/loading.js')
-    script(src='/js/float-chat.js')
+
     
     style.
       #clickEffect {
@@ -63,6 +64,8 @@ html
     script(src="/js/user/practice.js")
     script(src="/js/result.js")
     script(src="/js/profile.js")
+    script(src="/js/close-sidebar.user.js")
+    script(src="/js/quay-ngang.js")
     script.
       document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener("mousedown", function (e) {

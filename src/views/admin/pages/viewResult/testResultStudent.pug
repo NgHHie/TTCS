@@ -1,12 +1,12 @@
 extends ../../layout/default.pug
 include ../../mixins/pagination.pug
-
+//- kết quả chi tiết từng bài thi
 block main
   p.title(style="font-size:26px;font-weight:bold;") #{test.TenBaithi}
   .row.align-items-center.justify-content-between.mb-6
-    .d-flex.align-items-center
+    .d-flex.align-items-center.result-student-admin
       span.title Lớp:
-      .dropdown.ml-2
+      .dropdown.ml-2.margin-btn-all-admin
         button.btn.btn-primary.dropdown-toggle#dropdownButton(type='button' data-bs-toggle='dropdown')
           | #{className}
         ul.dropdown-menu
@@ -19,12 +19,13 @@ block main
       .search-wrapper.d-flex.align-items-center.ml-2
         input(type="text" class="form-control search-box" tim-kiem-stu placeholder="---Tìm kiếm---" value=keyword)
         button.btn.btn-light(btn-loc-stu) Lọc
+
   hr
   h5 Danh sách sinh viên
   if studentList == null || studentList.length == 0
     p Không có dữ liệu
   else
-    table(class="table table-striped")
+    table.detail-test-id(class="table table-striped")
       thead
         tr
           th STT
@@ -41,4 +42,4 @@ block main
                 td #{student.Ten}
                 td #{student.Lop}
                 td
-                  a.btn.btn-primary( idStu = student.MSV btn-detail) Xem chi tiết
+                  a.btn.btn-primary.btn-responsive( idStu = student.MSV btn-detail) Xem chi tiết

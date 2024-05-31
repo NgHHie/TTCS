@@ -1,11 +1,11 @@
 extends ../../layout/default.pug
 include ../../mixins/pagination.pug
-
+//- result-student
 block main
   .row.align-items-center.justify-content-between.mb-6
-    .d-flex.align-items-center
+    .d-flex.align-items-center.result-student-admin
       span.title Lớp:
-      .dropdown.ml-2
+      .dropdown.ml-2.margin-btn-all-admin
         button.btn.btn-primary.dropdown-toggle#dropdownButton(type='button' data-bs-toggle='dropdown')
           | #{className}
         ul.dropdown-menu
@@ -24,7 +24,7 @@ block main
   if studentList == null || studentList.length == 0
     p Không có dữ liệu
   else
-    table(class="table table-striped")
+    table.detail-test-id(class="table table-striped")
       thead
         tr
           th STT
@@ -41,5 +41,5 @@ block main
                 td #{student.Ten}
                 td #{student.Lop}
                 td
-                  a.btn.btn-primary( idStu = student.MSV btn-detail) Xem chi tiết
+                  a.btn.btn-primary.btn-responsive( idStu = student.MSV btn-detail) Xem chi tiết
   +pagination(pagination)

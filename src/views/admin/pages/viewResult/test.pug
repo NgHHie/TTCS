@@ -6,8 +6,8 @@ include ../../mixins/test.pug
 block main
   br
   .search-wrapper.d-flex.align-items-center
-    input(type="text" class="form-control search-box-test" tim-kiem-test placeholder="---Tìm kiếm---" value=keyword)
-    button.btn.btn-light(btn-loc-test) Lọc
+    input.search-wrapper(type="text" class="form-control search-box-test" tim-kiem-test placeholder="---Tìm kiếm---" value=keyword)
+    button.btn.btn-light.search-wrapper(btn-loc-test) Lọc
   br
   h4 Danh sách bài thi
   .test-list

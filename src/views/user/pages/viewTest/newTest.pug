@@ -1,7 +1,14 @@
 extends ../../layout/default.pug
 include ../../mixins/testDescription
+
 block main
     + test-description()
+    .dialog-overlay#dialogOverlay
+        // Nội dung của dialog
+        .dialog-content#dialogContent
+            p.sent#question-dialog Câu trả lời của bạn đã được gửi đi.
+            .footer-dialog
+                button#btn-close(onclick="closeDialog()")  Đóng
     .container-fluid.mt-4
         .card.mb-4
             .card-header.pb-0.ptit-color.c-white

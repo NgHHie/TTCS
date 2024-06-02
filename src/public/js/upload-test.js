@@ -517,8 +517,43 @@ async function Save() {
         }
         const data = await response.json();
         hideLoading();
-        //console.log('Dữ liệu đã được gửi thành công đến backend:', data);
-        window.location.href = "/test";
+        console.log('phản hồi: ', data);
+        if(data.code == 2) {
+            openDialog('Bài thi chứa từ ngữ không hợp lệ, vui lòng kiểm tra lại !!!')
+        }
+        const invalidWordsList = document.getElementById('invalidWordsList');
+        invalidWordsList.textContent = null
+        data.data.forEach(word => {
+            const wordElement = document.createElement('p');
+            wordElement.textContent = word;
+            wordElement.setAttribute('data-word', word);
+            invalidWordsList.appendChild(wordElement);
+        });
+        const contentElements = document.querySelectorAll('textarea, input[type="text"]'); 
+        for (const element of contentElements) {
+            element.style.backgroundColor = '';
+        }
+          // Xử lý sự kiện click vào từ không hợp lệ
+          invalidWordsList.addEventListener('click', function(event) {
+            console.log(event.target.tagName)
+            if (event.target.tagName === 'P') {
+              const word = event.target.getAttribute('data-word');
+              console.log('word:', word)
+              const contentElements = document.querySelectorAll('textarea, input[type="text"]');
+              let scroll = false
+              for (const element of contentElements) {
+                element.style.backgroundColor = '';
+                if (element.textContent.includes(word) || (element.value && element.value.includes(word))) {
+                    if (scroll == false) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    element.style.backgroundColor = 'yellow';  // Tô màu nền để dễ thấy
+                    scroll = true
+                }
+              }
+            }
+          });
+        // window.location.href = "/test";
     } catch (error) {
         showAlert('Đã xảy ra lỗi !!!')
         console.error('Đã xảy ra lỗi khi gửi dữ liệu đến backend:', error);
@@ -554,3 +589,50 @@ function UpDateIdForQuestion(id) {
     currentNumber--;
 }
 
+
+function openDialog(content) {
+    // localStorage.setItem('setTime', 0);
+    var dialogOverlay = document.getElementById('dialogOverlay');
+    var dialogContent = document.getElementById('dialogContent');
+    // var content1 = document.getElementById('content-dialog');
+    var question = document.getElementById('question-dialog');
+    // var btnContinue = document.getElementById('btn-continue');
+    question.innerHTML = `<p class="sent" id="question-dialog">${content}</p>`;
+    // content1.textContent = tittle;
+    // btnContinue.onclick = func;
+    dialogOverlay.style.display = 'block';
+    dialogContent.style.display = 'flex';
+    //console.log('click');
+}
+
+// Hàm đóng dialog
+function closeDialog() {
+    // localStorage.setItem('setTime', 1);
+    var dialogOverlay = document.getElementById('dialogOverlay');
+    var dialogContent = document.getElementById('dialogContent');
+    dialogOverlay.style.display = 'none';
+    dialogContent.style.display = 'none';
+}
+
+ // Xử lý sự kiện click vào nút dropdown
+ document.querySelector('.dropbtn').addEventListener('click', function() {
+    const dropdownContent = document.querySelector('.dropdown-content');
+    if (dropdownContent.style.display === 'block') {
+      dropdownContent.style.display = 'none';
+    } else {
+      dropdownContent.style.display = 'block';
+    }
+  });
+
+  // Ẩn dropdown nếu click ra ngoài
+  window.addEventListener('click', function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      const dropdowns = document.getElementsByClassName('dropdown-content');
+      for (let i = 0; i < dropdowns.length; i++) {
+        const openDropdown = dropdowns[i];
+        if (openDropdown.style.display === 'block') {
+          openDropdown.style.display = 'none';
+        }
+      }
+    }
+  });

@@ -90,7 +90,7 @@ const getTestById = async (id) => {
   }
 };
 
-const createNewTest = async (test, questionList) => {
+const createNewTest = async (test, questionList) => { 
   let t;
   try {
     t = await sequelize.transaction();

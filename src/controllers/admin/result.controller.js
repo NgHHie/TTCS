@@ -38,7 +38,7 @@ module.exports.student = async (req, res) => {
       limitedItem: 5,
     },
     req.query,
-    count.data.length
+    count.data ? count.data.length : 0
   );
   const studentList = await studentServices.getStudentWithFindObject(
     find,

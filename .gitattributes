@@ -1,6 +1,0 @@
-.env merge=ours
-config.json merge=ours
-src/config.json merge=ours
-src/config/config.json merge=ours
-src/config/connectDB.js merge=ours
-src/config/database.config.js merge=ours

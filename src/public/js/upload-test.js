@@ -625,13 +625,13 @@ function closeDialog() {
   });
 
   // Ẩn dropdown nếu click ra ngoài
-  window.addEventListener('click', function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      const dropdowns = document.getElementsByClassName('dropdown-content');
+  window.addEventListener("click", function (event) {
+    if (!event.target.matches(".dropbtn")) {
+      const dropdowns = document.getElementsByClassName("dropdown-content");
       for (let i = 0; i < dropdowns.length; i++) {
         const openDropdown = dropdowns[i];
-        if (openDropdown.style.display === 'block') {
-          openDropdown.style.display = 'none';
+        if (openDropdown.style.display === "block") {
+          openDropdown.style.display = "none";
         }
       }
     }

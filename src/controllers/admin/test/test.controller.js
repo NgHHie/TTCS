@@ -42,10 +42,12 @@ const testListPaginate = async (req, res) => {
   var data = testList.data;
 
   // //console.log(data);
-  for (var i = 0; i < data.length; i++) {
-    var y = data[i].ThoiGianBatDau;
-    var timeFormat = new Date(y);
-    data[i].ThoiGianBatDau = timeFormat.toLocaleString();
+  if (data != null) {
+    for (var i = 0; i < data.length; i++) {
+      var y = data[i].ThoiGianBatDau;
+      var timeFormat = new Date(y);
+      data[i].ThoiGianBatDau = timeFormat.toLocaleString();
+    }
   }
 
   res.render("admin/pages/viewTest/index.pug", {
@@ -128,10 +130,12 @@ const testListPaginateUser = async (req, res) => {
   var data = testList.data;
 
   // //console.log(data);
-  for (var i = 0; i < data.length; i++) {
-    var y = data[i].ThoiGianBatDau;
-    var timeFormat = new Date(y);
-    data[i].ThoiGianBatDau = timeFormat.toLocaleString();
+  if (data != null) {
+    for (var i = 0; i < data.length; i++) {
+      var y = data[i].ThoiGianBatDau;
+      var timeFormat = new Date(y);
+      data[i].ThoiGianBatDau = timeFormat.toLocaleString();
+    }
   }
 
   res.render("user/pages/viewTest/index.pug", {

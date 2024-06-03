@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       // options
       sequelize,
       modelName: "Admin",
-      tableName: "Admin",
+      tableName: "admin",
       timestamps: false,
     }
   );

@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
             // options
             sequelize,
             modelName: 'Submit',
-            tableName: 'Submit',
+            tableName: 'submit',
             timestamps: false,
 
         },

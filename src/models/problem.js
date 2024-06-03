@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             // options
             sequelize,
             modelName: 'Problem',
-            tableName: 'Problem',
+            tableName: 'problem',
             timestamps: false,
 
         },

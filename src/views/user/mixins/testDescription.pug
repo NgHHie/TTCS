@@ -56,13 +56,17 @@ mixin test-description(metadata)
                                         img(src=metadata.img_url, height="120")
                                     else 
                                         img(src='https://res.cloudinary.com/dyc1c2elf/image/upload/v1714894653/hpz5yqojda1ajpnrpkvv.jpg', height="120")
-            .form-group.ml-5
-                button.btn.ptit-color.text-white.mr-5(type='submit', onclick='render()') Tạo bài thi
+            .form-group.btn-row
+                button.btn.ptit-color.text-white.btn-responsive(type='submit', onclick='render()') Tạo bài thi
                 if metadata
-                    button.btn.ptit-color.text-white.px-4(onclick=`Save('${metadata.MaBaiThi}')`)
+                    button.btn.ptit-color.text-white.px-4.btn-responsive(onclick=`Save('${metadata.MaBaiThi}')`)
                         i.ti-save
                 else 
-                    button.btn.ptit-color.text-white.px-4(onclick='Save()')
+                    button.btn.ptit-color.text-white.px-4.btn-responsive(onclick='Save()')
                         i.ti-save
+                .dropdown
+                    button.btn.ptit-color.dropbtn.btn-responsive Từ không hợp lệ
+                    #invalidWordsList.dropdown-content
+                        
 
                     

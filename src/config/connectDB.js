@@ -1,12 +1,12 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 const sequelize = new Sequelize(
-  "railway",
+  "fashion-app11",
   "root",
-  "JtbDNtbFUBeYBfpgWnkhmFEEapWmQqlr",
+  "123456789",
   {
-    host: "viaduct.proxy.rlwy.net",
-    port: "56581",
+    host: "localhost",
+    port: "3306",
     dialect: "mysql",
   }
 );

@@ -57,7 +57,7 @@ router.put('/update-profile-student/:id', updateStudentHandler2)
 
 //Comment
 
-router.post('/comment/add',addCommentHandler);
+router.post('/comment/add',isAuth,addCommentHandler);
 router.get('/comment/:id',getCommentsHandler);
 router.get('/comment/reply/:id',getReplyCommentHandler);
 

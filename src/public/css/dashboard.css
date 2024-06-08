@@ -7,6 +7,7 @@
     grid-template-columns: 1fr 2fr;
     grid-gap: 30px;
     min-height: 200px;
+    display: flex;
 }
 
 .graphBox .box {
@@ -164,9 +165,6 @@ td {
         grid-template-columns: 1fr;
         height: auto;
     }
-    .graphBox > :nth-child(2){
-        height: 200px;
-    }
 
 }
 @media (max-width: 600px) {
@@ -174,4 +172,15 @@ td {
       display: flex;
       flex-direction: column;
     }
-  }
+    .card-dashboard{
+        margin-left: 20px;
+    }
+    .graphBox{
+        margin-left: 20px;
+    }
+}
+
+#done{
+    width: 100% !important;
+    height: 100% !important
+}

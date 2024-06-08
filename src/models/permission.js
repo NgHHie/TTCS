@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             // options
             sequelize,
             modelName: "Permission",
-            tableName: "Permission",
+            tableName: "permission",
             timestamps: false,
         }
     );

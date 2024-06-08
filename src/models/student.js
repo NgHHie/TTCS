@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
             // options
             sequelize,
             modelName: 'Student',
-            tableName: 'SinhVien',
+            tableName: 'sinhvien',
             timestamps: false,
 
         },

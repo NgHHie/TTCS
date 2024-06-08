@@ -252,6 +252,40 @@ const getDetailList = async (req, res) => {
   }
 
 }
+const containsInvalidWords = async (data, invalidWords) => {
+  function checkString(string) {
+    return invalidWords.filter(word => string.includes(word));
+  }
+
+  // Sử dụng Set để lưu trữ các từ ngữ không hợp lệ, tránh trùng lặp
+  let invalidFoundSet = new Set();
+
+  // Kiểm tra các trường trong đối tượng test
+  for (const key in data.test) {
+    const value = data.test[key];
+    if (typeof value === 'string') {
+      const foundWords = checkString(value);
+      foundWords.forEach(word => invalidFoundSet.add(word));
+    }
+  }
+
+  // Kiểm tra các câu hỏi trong questionList
+  for (const question of data.questionList) {
+    for (const key in question) {
+      const value = question[key];
+      if (typeof value === 'string') {
+        const foundWords = checkString(value);
+        foundWords.forEach(word => invalidFoundSet.add(word));
+      }
+    }
+  }
+
+  // Chuyển Set trở lại thành mảng
+  return Array.from(invalidFoundSet);
+}
+
+
+const invalidWords = ['câu 1', 'hehe', 'bất hợp pháp'];
 
 const postTestHandler = async (req, res) => {
   var reqBody = req.body;
@@ -262,8 +296,19 @@ const postTestHandler = async (req, res) => {
   let msv = req.jwtDecoded.data.id;
   
   test.TacGia = msv;
-  // //console.log(test)
-  // //console.log(questionList)
+  console.log('test: ', test)
+  console.log('questionList: ', questionList)
+  let data = {test, questionList}
+  let invalidWord = await containsInvalidWords(data, invalidWords);
+  console.log('chứa từ không phù hợp: ', invalidWord)
+  if(invalidWord.length > 0) {
+    return res.status(200).json({
+      code: 2,
+      status: 200,
+      message: "Tạo bài thi thất bại! Bài thi chứa từ không phù hợp",
+      data: invalidWord
+    })
+  }
   var status = await createNewTest(test, questionList)
   if (status) {
     res.status(200).json({

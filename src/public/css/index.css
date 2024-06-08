@@ -69307,6 +69307,12 @@ label,
     justify-content: space-between;
   }
 }
+@media (max-width: 635px){
+  .content-test-detail {
+    font-size: 0.8rem;
+  }
+  
+}
 @media (max-width: 576px){
   .col-md-1{
     display: none;
@@ -69772,5 +69778,67 @@ label,
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+/* bảng thư viện bên user */
+
+@media (max-width: 665px){
+  .th-round-test>th {
+    font-size: 1rem;
+  }
+  .tb-round-test>td{
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 599px) {
+  .table.table-striped.tb-libary>thead>tr th:nth-child(2){
+    display: none;
+  }
+  .table.table-striped.tb-libary>tbody>tr td:nth-child(2){
+    display: none;
+  }
+  .table.table-striped.tb-libary>thead>tr th:nth-child(3){
+    display: none;
+  }
+  .table.table-striped.tb-libary>tbody>tr td:nth-child(3){
+    display: none;
+  }
+}
+
+@media (max-width: 439px){
+  .table.tb-libary>thead>tr th:nth-child(2){
+    display: none;
+  }
+  .table.tb-libary>tbody>tr td:nth-child(2){
+    display: none;
+  }
+  .table.tb-libary>thead>tr th:nth-child(3){
+    display: none;
+  }
+  .table.tb-libary>tbody>tr td:nth-child(3){
+    display: none;
+  }
+  .table.tb-libary>thead>tr th:nth-child(5){
+    display: none;
+  }
+  .table.tb-libary>tbody>tr td:nth-child(5){
+    display: none;
+  }
+  .th-round-test>th:nth-child(6){
+    display: none;
+  }
+  .tb-round-test>td:nth-child(6){
+    display: none;
+  }
+  .th-round-test>th:nth-child(7){
+    display: table-cell !important;
+  }
+  .tb-round-test>td:nth-child(7){
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }

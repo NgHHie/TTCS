@@ -9,6 +9,7 @@ const {
   getQuestionByTestHandler,
   postTestHandler,
   deleteTestHandler,
+  getTestByIdHandler,
   updateTestHandler,
   getTestWithStudent,
   searchTestHandler,
@@ -71,7 +72,7 @@ router.put("/update-profile-student/:id", updateStudentHandler2);
 
 //Comment
 
-router.post('/comment/add',addCommentHandler);
+router.post('/comment/add',isAuth,addCommentHandler);
 router.get('/comment/:id',getCommentsHandler);
 router.get('/comment/reply/:id',getReplyCommentHandler);
 
@@ -91,6 +92,7 @@ router.get("/get-test", isAuth, getTestList);
 router.get("/get-test-per-page", isAuth, getTestByPage);
 router.get("/get-test/:id", isAuth, getQuestionByTestHandler);
 router.get("/search-test", isAuth, searchTestHandler);
+router.get("/get-detail-test/:id",getTestByIdHandler);
 
 router.put("/update-test/:id", isAdmin, updateTestHandler);
 

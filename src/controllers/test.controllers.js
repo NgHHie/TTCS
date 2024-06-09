@@ -127,6 +127,32 @@ const getTestByPage = async (req, res) => {
   }
 }
 
+const getTestByIdHandler = async (req,res)=>{
+  const testId = req.params.id;
+  const metadata = await getTestById(testId);
+  if(metadata.status === 200){
+    const testInfo = metadata.data;
+    res.status(200).json(testInfo);
+  }else if (metadata.status === 500) {
+    const response = {
+      code: 0,
+      status: 500,
+      message: "internal server error",
+    };
+
+    res.status(500).json(response);
+  } else {
+    const response = {
+      code: 0,
+      status: 404,
+      message: "Không tìm thấy bài thi",
+    };
+
+    res.status(404).json(response);
+  }
+  
+}
+
 
 const getQuestionByTestHandler = async (req, res) => {
   const testId = req.params.id;
@@ -439,7 +465,7 @@ const postSubmit = async (req, res) => {
 module.exports = {
   getTestList, getQuestionByTestHandler, postTestHandler, deleteTestHandler, updateTestHandler, searchTestHandler,
   getTestWithStudent, getResultList, getDetailList, postTestHandler, getQuestionHandlernoAns, postSubmit, getTestByPage, getSearchTest,
-  getProbByPage
+  getProbByPage,getTestByIdHandler
 }
 
 

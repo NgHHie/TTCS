@@ -1,6 +1,15 @@
 const commentInput = document.querySelector(".input-comment input");
 const sendButton = document.querySelector(".button-send");
 const commentBox = document.querySelector(".box-comment"); // Assuming this is the element for displaying comments
+const timeTest = document.querySelector(".desc.time-of-test .info");
+const numerousOfQuestions = document.querySelector(".desc.numerous-of-question .info");
+const numerousOfPeople = document.querySelector(".desc.numerous-of-people .info");
+const nameOfTest = document.querySelector(".title-test");
+const subjectTest = document.querySelector(".subject-test");
+
+
+
+console.log(timeTest, " ",numerousOfQuestions," ",numerousOfPeople);
 const currentUrl = window.location.href;
 const idTest = currentUrl.slice(29);
 console.log(typeof idTest);
@@ -36,6 +45,38 @@ const fetchComments = async () => {
       alert("An error occurred while fetching comments.");
     });
 };
+
+async function fetchTestDetails() {
+  return fetch(`http://localhost:8080/api/get-detail-test/${idTest}`) // Replace with actual URL
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error fetching test details: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Extract and display test details (assuming structure of the data)
+      console.log(data);
+      const nameTest = data[0].TenBaithi;
+      const subject = data[0].TheLoai;
+      const testDuration = data[0].ThoiGianThi; // Replace with appropriate property name
+      const numberOfQuestions = data[0].SoLuongCau; // Replace with appropriate property name
+      // const numberOfParticipants = data.data.soLanThi; // Replace with appropriate property name
+      nameOfTest.textContent = nameTest;
+      subjectTest.textContent = "#"+subject;
+      timeTest.textContent = "Thời gian làm bài: " + testDuration + " phút"; // Assuming testDuration is a timestamp
+      numerousOfQuestions.textContent = "Số lượng câu hỏi: "+numberOfQuestions + " câu";
+      //numerousOfPeople.textContent = numberOfParticipants;
+
+      // (Optional) Handle successful data retrieval using a then block here
+    })
+    .catch(error => {
+      console.error("Error fetching test details:", error);
+      alert("An error occurred while fetching test details.");
+    });
+}
+
+fetchTestDetails();
 
 function calculateTimeSince(timestamp) {
   // Parse the timestamp string into a Date object

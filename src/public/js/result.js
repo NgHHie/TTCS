@@ -409,7 +409,6 @@ for (var i = 0; i < listBtnNav.length; i++) {
     }
   });
 }
-
 function sidebarColor(a) {
   var parent = document.querySelector(".active-item-nav .btn-nav");
 

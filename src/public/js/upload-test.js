@@ -514,7 +514,7 @@ async function Save() {
     console.log("phản hồi: ", data);
     if (data.code == 2) {
       openDialog("Bài thi chứa từ ngữ không hợp lệ, vui lòng kiểm tra lại !!!");
-    }
+    } else window.location.href = "/test";
     const invalidWordsList = document.getElementById("invalidWordsList");
     invalidWordsList.textContent = null;
     data.data.forEach((word) => {

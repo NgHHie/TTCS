@@ -35,12 +35,12 @@ mixin test-table(tests, pagination)
                                         a.mb-0(href="./test/edit-test/" + test.MaBaiThi)
                                             button.btn.cur-p.ptit-color.btn-color.btn-responsive Chỉnh sửa
                                     td
-                                        a.mb-0(onclick=`confirmDelete('${test.MaBaiThi}')`)
+                                        a.mb-0(onclick=`UserconfirmDelete('${test.MaBaiThi}')`)
                                             button.btn.btn-primary.ptit-color.btn-color.btn-responsive Xóa 
                                     td(style="display: none;")  
                                         a.mb-0(href="./test/edit-test/" + test.MaBaiThi)
                                             button.btn.cur-p.ptit-color.btn-color.btn-responsive.btn-put Chỉnh sửa
-                                        a.mb-0(onclick=`confirmDelete('${test.MaBaiThi}')`)
+                                        a.mb-0(onclick=`UserconfirmDelete('${test.MaBaiThi}')`)
                                             button.btn.btn-primary.ptit-color.btn-color.btn-responsive.btn-delete Xóa 
                         else
                             tr

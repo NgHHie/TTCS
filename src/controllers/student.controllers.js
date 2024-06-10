@@ -94,7 +94,7 @@ const getStudentByIdHandler = async (req, res) => {
       data: student.data,
     };
 
-    res.status(200).json(response);
+    res.status(200).json(response.data);
   } else if (student.status === 404) {
     const response = {
       code: 0,

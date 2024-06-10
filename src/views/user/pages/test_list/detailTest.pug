@@ -1,11 +1,76 @@
 extends ../../layout/default
+
+
+
+
+
 block main
-    .card
-        .card-body
-            h5.card-title Tên bài thi
-            h6.card-subtitle.mb-2.text-body-secondary Chủ đề
-            p.card-text Bắt đầu
-            p.card-text Số Câu
-            p.card-text Thời gian
-            a.btn.btn-primary(href='#') Vào thi
-            a.btn.btn-primary(href='#') Bình luận
+    .box-detail-comment
+        .card.box-detail
+            .card-body.info-test
+                .subject-test #title
+                .title-test Name of Test 
+                .title-page Information of Test 
+                div.desc.time-of-test 
+                    p <i class="fa-regular fa-clock"></i>
+                    p Time of test: 120 minutes 
+                div.desc.numerous-of-question
+                    p <i class="fa-regular fa-circle-question"></i>
+                    p So cau hoi: 12 cau
+                div.desc.numerous-of-people 
+                    p <i class="fa-solid fa-user"></i>
+                    p 120 peoples was tested
+                
+                        
+                div.option
+                    select.select-option-time
+                        option(value="0") 0 minutes
+                        option(value="5") 5 minutes
+                        option(value="10") 10 minutes 
+                        option(value="15") 15 minutes 
+                        option(value="20") 20 minutes 
+                        option(value="45") 45 minutes 
+                div
+                    a(href="#").button-start.btn.cur-p.ptit-color.btn-color Start Test
+                
+        .card.comment-test
+            .card-body.info-test
+                .title-comment Comments 
+                div.box-input-comment 
+                    .input-comment 
+                        input(type="text" placeholder="Enter comment....")
+                    .button-send Send
+                div.box-comment
+                    .item 
+                        .profilePic
+                            img(src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", alt="")
+                        .nameUser Join Smith 
+                        .timeComment 5 minutes ago 
+                        .commentContent The test is the best for me
+                    .item 
+                        .profilePic
+                            img(src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", alt="")
+                        .nameUser Join Smith 
+                        .timeComment 5 minutes ago 
+                        .commentContent The test is the best for me
+                    .item 
+                        .profilePic
+                            img(src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", alt="")
+                        .nameUser Join Smith 
+                        .timeComment 5 minutes ago 
+                        .commentContent The test is the best for me
+                    .item 
+                        .profilePic
+                            img(src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", alt="")
+                        .nameUser Join Smith 
+                        .timeComment 5 minutes ago 
+                        .commentContent The test is the best for me
+                    .item 
+                        .profilePic
+                            img(src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png", alt="")
+                        .nameUser Join Smith 
+                        .timeComment 5 minutes ago 
+                        .commentContent The test is the best for me
+    script(src="/js/detailTest.js") 
+                    
+

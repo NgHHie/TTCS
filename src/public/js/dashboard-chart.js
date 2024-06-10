@@ -78,8 +78,49 @@ new Chart(done, {
 
 
 
+new Chart('visited', {
+    type: 'bar',
+    data: {
+        labels: list.first,
+        datasets: [{
+            label: 'Người dùng tạo mới mỗi tháng',
+            data: list.second,
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100, // Set your desired maximum value here
+        ticks: {
+            stepSize: 10 // Set your desired step size here
+        }
+      }
+    }
+  },
+});
+
 // new Chart('visited', {
-//     type: 'bar',
+//     type: 'doughnut',
 //     data: {
 //         labels: list.first,
 //         datasets: [{
@@ -108,66 +149,18 @@ new Chart(done, {
 //                 'rgb(153, 102, 255)',
 //                 'rgb(201, 203, 207)'
 //             ],
-//             borderWidth: 1
+//             hoverOffset: 4
 //         }]
 //     },
 //     options: {
-//         scales: {
-//             y: {
-//                 beginAtZero: true
-//             }
-//         },
-//         xAxis: {
+//         plugins: {
+//             legend: {
+//                 display: false,
+//             },
 //             title: {
 //                 display: true,
-//                 text: 'Tên Cột X'
+//                 text: 'Người dùng tạo mới mỗi tháng'
 //             }
 //         }
 //     }
 // });
-
-new Chart('visited', {
-    type: 'doughnut',
-    data: {
-        labels: list.first,
-        datasets: [{
-            label: 'Người dùng tạo mới mỗi tháng',
-            data: list.second,
-            backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 205, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(201, 203, 207, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 205, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(54, 162, 235, 1)'
-            ],
-            borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
-            ],
-            hoverOffset: 4
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false,
-            },
-            title: {
-                display: true,
-                text: 'Người dùng tạo mới mỗi tháng'
-            }
-        }
-    }
-});

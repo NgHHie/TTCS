@@ -6,11 +6,13 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 30px;
-    min-height: 200px;
+    height: 372px;
     display: flex;
 }
 
 .graphBox .box {
+    display: flex;
+    justify-content: center;
     position: relative;
     background: white;
     padding: 20px;
@@ -20,7 +22,6 @@
     grid-gap: 20px;
 
 }
-
 .cardBox-dashboard {
     position: relative;
     width: 96%;
@@ -157,13 +158,29 @@ td {
     color: white;
 
 }
-
-
-
 @media (max-width: 991px) {
     .graphBox {
         grid-template-columns: 1fr;
         height: auto;
+    }
+
+}
+@media (min-Width: 750px){
+    #visited{
+        position: absolute;
+        bottom: 40px;
+    }
+}
+@media (max-width: 750px){
+    .graphBox{
+        display: flex;
+        flex-direction: column;
+      }
+    .card-dashboard{
+        margin-left: 20px;
+    }
+    .graphBox{
+        margin-left: 20px;
     }
 
 }
@@ -178,4 +195,8 @@ td {
     .graphBox{
         margin-left: 20px;
     }
+}
+
+.graphBox{
+    min-height: max-content;
 }

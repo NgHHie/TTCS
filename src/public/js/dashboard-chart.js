@@ -83,7 +83,7 @@ new Chart('visited', {
     data: {
         labels: list.first,
         datasets: [{
-            label: 'Người dùng tạo mới mỗi tháng',
+            label: 'số lượng người dùng tạo mới',
             data: list.second,
             backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -103,16 +103,17 @@ new Chart('visited', {
             'rgb(153, 102, 255)',
             'rgb(201, 203, 207)'
             ],
-            borderWidth: 1
+            borderWidth: 1,
+            barThickness: 100,
         }]
     },
     options: {
     scales: {
       y: {
         beginAtZero: true,
-        max: 100, // Set your desired maximum value here
+        max: 100,
         ticks: {
-            stepSize: 10 // Set your desired step size here
+            stepSize: 10,
         }
       }
     }

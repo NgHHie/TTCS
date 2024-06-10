@@ -1,4 +1,4 @@
-const { getResultByIdStuAndIdTest, getAllResult, getResultWithIdResult, getResultWithMaKetQua, getResultWithDate } = require("../services/result.services");
+const { getResultByIdStuAndIdTest, getAllResult, getResultWithIdResult, getResultWithMaKetQua, getResultWithDate, getResultByIdTest } = require("../services/result.services");
 const { getStudentById } = require("../services/student.service");
 const { getTestById, getURL } = require("../services/test.service");
 const { getQuestionOfTest } = require("../services/question.service");
@@ -49,6 +49,18 @@ const getDetailTestWithIdStuAndIdTest = async (idStudent, idTest) => {
   }
   return dataRes;
 };
+
+
+const getNumerousOfTestedPeople = async(req,res)=>{
+  const idTest = req.params.id ;
+  const data = await getResultByIdTest(idTest);
+  if(data.status === 200){
+    res.status(200).json(data.data.length);
+  }
+  else{
+    res.status(500).json({message:"Invalid error server!"});
+  }
+}
 
 
 const getDetailTestWithIdStuAndIdResult = async (idStudent, idResult) => {
@@ -199,5 +211,6 @@ module.exports = {
   getDetailTestWithIdStuAndIdTest,
   getAllResultHandler,
   getAllStaticWithIdResult,
-  getDetailTestWithIdStuAndIdResult
+  getDetailTestWithIdStuAndIdResult,
+  getNumerousOfTestedPeople,
 };

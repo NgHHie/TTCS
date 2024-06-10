@@ -1,3 +1,5 @@
+
+
 const commentInput = document.querySelector(".input-comment input");
 const sendButton = document.querySelector(".button-send");
 const commentBox = document.querySelector(".box-comment"); // Assuming this is the element for displaying comments
@@ -5,7 +7,11 @@ const timeTest = document.querySelector(".desc.time-of-test .info");
 const numerousOfQuestions = document.querySelector(".desc.numerous-of-question .info");
 const numerousOfPeople = document.querySelector(".desc.numerous-of-people .info");
 const nameOfTest = document.querySelector(".title-test");
+const numerousOfTested = document.querySelector(".desc.numerous-of-people .info");
 const subjectTest = document.querySelector(".subject-test");
+
+const buttonStart = document.querySelector(".button-start");
+
 
 
 
@@ -46,6 +52,24 @@ const fetchComments = async () => {
     });
 };
 
+async function fetchNumberousOfTested(){
+  return fetch(`/api/result/numerous/${idTest}`)
+    .then(response => {
+      if(!response.ok){
+        throw new Error('Error fetching api');
+      }
+      return response.json();
+    })
+    .then(data=>{
+      console.log(data);
+      numerousOfTested.textContent = "Số lượng làm bài thi "+data;
+    })
+    .catch(error => {
+      console.error("Error fetching numerous tested:", error);
+      alert("An error occurred while fetching.");
+    });
+}
+
 async function fetchTestDetails() {
   return fetch(`http://localhost:8080/api/get-detail-test/${idTest}`) // Replace with actual URL
     .then(response => {
@@ -75,6 +99,8 @@ async function fetchTestDetails() {
       alert("An error occurred while fetching test details.");
     });
 }
+
+fetchNumberousOfTested();
 
 fetchTestDetails();
 
@@ -235,3 +261,6 @@ console.log("commentInput", commentInput);
 fetchComments(); // Call fetchComments to retrieve comments on page load
 
 sendButton?.addEventListener("click", addComment);
+buttonStart?.addEventListener("click",()=>{
+  window.location.href = ('/result/test/' + idTest);
+})

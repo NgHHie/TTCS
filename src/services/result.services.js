@@ -31,7 +31,11 @@ const getResultByIdStuAndIdTest = async (idStu, idTest) => {
     return data;
   }
 };
+
+
+
 const getResultByIdTest = async (idTest) => {
+  console.log(idTest);
   const data = {
     status: null,
     data: null,

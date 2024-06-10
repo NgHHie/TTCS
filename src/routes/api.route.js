@@ -36,6 +36,7 @@ const {
   getDetailTestWithIdStuAndIdTest,
   getAllStaticWithDate,
   getAllStaticWithIdResult,
+  getNumerousOfTestedPeople,
 } = require("../controllers/result.controllers");
 
 const {
@@ -86,6 +87,8 @@ router.post("/submit", isAuth, postSubmit);
 router.post("/khocvl", isAuth, codeSubmit);
 router.get("/search-test", isAuth, getSearchTest);
 
+
+
 //Admin
 //vu1
 router.get("/get-test", isAuth, getTestList);
@@ -113,6 +116,8 @@ router.get(
   isAdmin,
   getDetailTestWithIdStuAndIdTest
 );
+
+router.get("/result/numerous/:id",getNumerousOfTestedPeople);
 
 //dat
 router.get("/getAllStatic", isAdmin, getAllResultHandler);

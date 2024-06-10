@@ -4,27 +4,23 @@ const commentInput = document.querySelector(".input-comment input");
 const sendButton = document.querySelector(".button-send");
 const commentBox = document.querySelector(".box-comment"); // Assuming this is the element for displaying comments
 const timeTest = document.querySelector(".desc.time-of-test .info");
-const numerousOfQuestions = document.querySelector(
-  ".desc.numerous-of-question .info"
-);
-const numerousOfPeople = document.querySelector(
-  ".desc.numerous-of-people .info"
-);
+const numerousOfQuestions = document.querySelector(".desc.numerous-of-question .info");
+const numerousOfPeople = document.querySelector(".desc.numerous-of-people .info");
 const nameOfTest = document.querySelector(".title-test");
 const numerousOfTested = document.querySelector(".desc.numerous-of-people .info");
 const subjectTest = document.querySelector(".subject-test");
 
-console.log(timeTest, " ", numerousOfQuestions, " ", numerousOfPeople);
+const buttonStart = document.querySelector(".button-start");
+
+
+
+
+console.log(timeTest, " ",numerousOfQuestions," ",numerousOfPeople);
 const currentUrl = window.location.href;
-const url = window.location.pathname;
-
-// Sử dụng phương thức split để lấy phần testId
-const parts = url.split("/"); // Giả sử URL là dạng "/detail/:testId"
-const idTest = parts[parts.length - 1]; // Phần tử cuối cùng của mảng là testId
-
-console.log("idtest: ", idTest);
+const idTest = currentUrl.slice(29);
+console.log(typeof idTest);
 var comments = []; // Array to store retrieved comments
-var nameStudent = "";
+var nameStudent = '';
 const fetchComments = async () => {
   return fetch(`/api/comment/${idTest}`)
     .then((response) => {
@@ -75,14 +71,14 @@ async function fetchNumberousOfTested(){
 }
 
 async function fetchTestDetails() {
-  return fetch(`/api/get-detail-test/${idTest}`) // Replace with actual URL
-    .then((response) => {
+  return fetch(`http://localhost:8080/api/get-detail-test/${idTest}`) // Replace with actual URL
+    .then(response => {
       if (!response.ok) {
         throw new Error(`Error fetching test details: ${response.statusText}`);
       }
       return response.json();
     })
-    .then((data) => {
+    .then(data => {
       // Extract and display test details (assuming structure of the data)
       console.log(data);
       const nameTest = data[0].TenBaithi;
@@ -91,15 +87,14 @@ async function fetchTestDetails() {
       const numberOfQuestions = data[0].SoLuongCau; // Replace with appropriate property name
       // const numberOfParticipants = data.data.soLanThi; // Replace with appropriate property name
       nameOfTest.textContent = nameTest;
-      subjectTest.textContent = "#" + subject;
+      subjectTest.textContent = "#"+subject;
       timeTest.textContent = "Thời gian làm bài: " + testDuration + " phút"; // Assuming testDuration is a timestamp
-      numerousOfQuestions.textContent =
-        "Số lượng câu hỏi: " + numberOfQuestions + " câu";
+      numerousOfQuestions.textContent = "Số lượng câu hỏi: "+numberOfQuestions + " câu";
       //numerousOfPeople.textContent = numberOfParticipants;
 
       // (Optional) Handle successful data retrieval using a then block here
     })
-    .catch((error) => {
+    .catch(error => {
       console.error("Error fetching test details:", error);
       alert("An error occurred while fetching test details.");
     });
@@ -136,7 +131,7 @@ function calculateTimeSince(timestamp) {
 
 function getStudentInfo(studentId) {
   return new Promise((resolve, reject) => {
-    fetch(`/api/get-student/${studentId}`)
+    fetch(`http://localhost:8080/api/get-student/${studentId}`)
       .then((response) => {
         if (response.ok) {
           return response.json(); // Return a promise that resolves with student data
@@ -158,27 +153,27 @@ function getStudentInfo(studentId) {
 
 const displayComments = () => {
   commentBox.innerHTML = ""; // Clear existing comments before displaying new ones
-
+ 
   const commentElements = comments.map((comment) => {
     const nameUserContainer = document.createElement("div");
-    nameUserContainer.classList.add("nameUser");
+    nameUserContainer.classList.add("nameUser"); 
     getStudentInfo(comment.MaSinhVien) // Replace with actual student ID
       .then((studentInfo) => {
-        console.log(studentInfo);
+        console.log(studentInfo); 
         nameStudent = studentInfo[0].Ten;
-        console.log(nameStudent); // Use the student info
+        console.log(nameStudent)// Use the student info
         // Add class for user name styling
         nameUserContainer.textContent = nameStudent || "Anonymous"; // Use MaSinhVien if available, otherwise 'Anonymous'
       })
       .catch((error) => {
         console.error("Error fetching student info:", error);
       });
-    console.log(nameStudent);
+      console.log(nameStudent);
     const commentElement = document.createElement("div");
     commentElement.classList.add("item"); // Add the main comment container class
     const profilePic = document.createElement("div");
     profilePic.classList.add("profilePic");
-
+    
     const image = document.createElement("img");
 
     // Profile picture (replace with actual logic for profile picture URL)
@@ -226,11 +221,11 @@ const addComment = async () => {
 
   const commentData = {
     content: commentText,
-    MaBaiThi: idTest, // Assuming you have a way to get the exam ID
+    MaBaiThi: currentUrl.slice(29), // Assuming you have a way to get the exam ID
     // Replace with actual student ID
   };
 
-  return fetch("/api/comment/add", {
+  return fetch("http://localhost:8080/api/comment/add", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

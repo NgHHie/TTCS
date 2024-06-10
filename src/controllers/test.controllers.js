@@ -1,17 +1,32 @@
-
-const { getAllTest, getTestById, createNewTest, deleteTestById, updateTestById, searchTestByName, getTestByStudentId, getAllTestPerPage
-  , getTestByText, getAllProbPerPage } = require('../services/test.service')
-const { getQuestionOfTest, getQuestionOfTestUser } = require('../services/question.service')
-const { getStudentById } = require('../services/student.service')
-const { getDetailListWithIdResultandIdStu } = require('../services/detail.services')
-const { createNewResult, getResultListofStudent, getResultbyIdStuandIdResult } = require('../services/result.services')
-
+const {
+  getAllTest,
+  getTestById,
+  createNewTest,
+  deleteTestById,
+  updateTestById,
+  searchTestByName,
+  getTestByStudentId,
+  getAllTestPerPage,
+  getTestByText,
+  getAllProbPerPage,
+} = require("../services/test.service");
+const {
+  getQuestionOfTest,
+  getQuestionOfTestUser,
+} = require("../services/question.service");
+const { getStudentById } = require("../services/student.service");
+const {
+  getDetailListWithIdResultandIdStu,
+} = require("../services/detail.services");
+const {
+  createNewResult,
+  getResultListofStudent,
+  getResultbyIdStuandIdResult,
+} = require("../services/result.services");
 
 const getTestList = async (req, res) => {
   var tests = await getAllTest();
   if (tests.status === 200) {
-
-
     var tests = await getAllTest();
     if (tests.status === 200) {
       const response = {
@@ -43,15 +58,14 @@ const getTestList = async (req, res) => {
 };
 
 const getProbByPage = async (req, res) => {
-  var probs = await getAllProbPerPage(1)
+  var probs = await getAllProbPerPage(1);
   if (probs.status === 200) {
     const response = {
       code: 1,
       status: 200,
       message: "successfully",
       data: probs.data,
-
-    }
+    };
     res.status(200).json(response);
   } else if (probs.status === 500) {
     const response = {
@@ -70,7 +84,7 @@ const getProbByPage = async (req, res) => {
 
     res.status(404).json(response);
   }
-}
+};
 
 const getSearchTest = async (req, res) => {
   const inputText = req.query.text;
@@ -81,12 +95,11 @@ const getSearchTest = async (req, res) => {
       code: 1,
       status: 200,
       message: "da tim thay cac bai thi successfully",
-      data: tests
+      data: tests,
     };
 
     res.status(200).json(response);
-  }
-  else {
+  } else {
     const response = {
       code: 0,
       status: 500,
@@ -95,18 +108,17 @@ const getSearchTest = async (req, res) => {
 
     res.status(500).json(response);
   }
-}
+};
 
 const getTestByPage = async (req, res) => {
-  var tests = await getAllTestPerPage(req.query.page)
+  var tests = await getAllTestPerPage(req.query.page);
   if (tests.status === 200) {
     const response = {
       code: 1,
       status: 200,
       message: "successfully",
       data: tests.data,
-
-    }
+    };
     res.status(200).json(response);
   } else if (tests.status === 500) {
     const response = {
@@ -125,15 +137,14 @@ const getTestByPage = async (req, res) => {
 
     res.status(404).json(response);
   }
-}
-
-const getTestByIdHandler = async (req,res)=>{
+};
+const getTestByIdHandler = async (req, res) => {
   const testId = req.params.id;
   const metadata = await getTestById(testId);
-  if(metadata.status === 200){
+  if (metadata.status === 200) {
     const testInfo = metadata.data;
     res.status(200).json(testInfo);
-  }else if (metadata.status === 500) {
+  } else if (metadata.status === 500) {
     const response = {
       code: 0,
       status: 500,
@@ -150,9 +161,7 @@ const getTestByIdHandler = async (req,res)=>{
 
     res.status(404).json(response);
   }
-  
-}
-
+};
 
 const getQuestionByTestHandler = async (req, res) => {
   const testId = req.params.id;
@@ -191,7 +200,7 @@ const getQuestionByTestHandler = async (req, res) => {
 const getQuestionHandlernoAns = async (req, res) => {
   const testId = req.params.id;
   var metadata = await getTestById(testId);
-  var questions = await getQuestionOfTestUser(testId)
+  var questions = await getQuestionOfTestUser(testId);
   // //console.log(questions)
   if (questions) {
     const response = {
@@ -199,12 +208,11 @@ const getQuestionHandlernoAns = async (req, res) => {
       status: 200,
       message: "lay cau hoi successfully",
       metadata: metadata[0],
-      data: questions
+      data: questions,
     };
 
     res.status(200).json(response);
-  }
-  else {
+  } else {
     const response = {
       code: 0,
       status: 500,
@@ -213,24 +221,23 @@ const getQuestionHandlernoAns = async (req, res) => {
 
     res.status(500).json(response);
   }
-}
+};
 
 const getResultList = async (req, res) => {
-  let msv = req.params.msv
+  let msv = req.params.msv;
 
-  let resultList = await getResultListofStudent(msv)
+  let resultList = await getResultListofStudent(msv);
 
   if (resultList) {
     const response = {
       code: 1,
       status: 200,
       message: "lay lich su successfully",
-      data: resultList
+      data: resultList,
     };
 
     res.status(200).json(response);
-  }
-  else {
+  } else {
     const response = {
       code: 0,
       status: 500,
@@ -239,20 +246,19 @@ const getResultList = async (req, res) => {
 
     res.status(500).json(response);
   }
-
-}
+};
 
 const getDetailList = async (req, res) => {
-  let mkq = req.params.mkq
-  let msv = req.params.msv
+  let mkq = req.params.mkq;
+  let msv = req.params.msv;
 
-  let detailList = await getDetailListWithIdResultandIdStu(mkq, msv)
-  let mabaithi = detailList[0].MaBaiThi
-  detailList = detailList.map(detail => {
+  let detailList = await getDetailListWithIdResultandIdStu(mkq, msv);
+  let mabaithi = detailList[0].MaBaiThi;
+  detailList = detailList.map((detail) => {
     const { MaBaiThi, MaCauHoi, MaKetQua, ...rest } = detail;
     return rest;
   });
-  let diem = await getResultbyIdStuandIdResult(mkq)
+  let diem = await getResultbyIdStuandIdResult(mkq);
 
   if (detailList) {
     const response = {
@@ -262,12 +268,11 @@ const getDetailList = async (req, res) => {
       maketqua: mkq,
       mabaithi: mabaithi,
       diem: diem,
-      data: detailList
+      data: detailList,
     };
 
     res.status(200).json(response);
-  }
-  else {
+  } else {
     const response = {
       code: 0,
       status: 500,
@@ -276,11 +281,10 @@ const getDetailList = async (req, res) => {
 
     res.status(500).json(response);
   }
-
-}
+};
 const containsInvalidWords = async (data, invalidWords) => {
   function checkString(string) {
-    return invalidWords.filter(word => string.includes(word));
+    return invalidWords.filter((word) => string.includes(word));
   }
 
   // Sử dụng Set để lưu trữ các từ ngữ không hợp lệ, tránh trùng lặp
@@ -289,9 +293,9 @@ const containsInvalidWords = async (data, invalidWords) => {
   // Kiểm tra các trường trong đối tượng test
   for (const key in data.test) {
     const value = data.test[key];
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       const foundWords = checkString(value);
-      foundWords.forEach(word => invalidFoundSet.add(word));
+      foundWords.forEach((word) => invalidFoundSet.add(word));
     }
   }
 
@@ -299,112 +303,114 @@ const containsInvalidWords = async (data, invalidWords) => {
   for (const question of data.questionList) {
     for (const key in question) {
       const value = question[key];
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         const foundWords = checkString(value);
-        foundWords.forEach(word => invalidFoundSet.add(word));
+        foundWords.forEach((word) => invalidFoundSet.add(word));
       }
     }
   }
 
   // Chuyển Set trở lại thành mảng
   return Array.from(invalidFoundSet);
-}
+};
 
-
-const invalidWords = ['câu 1', 'hehe', 'bất hợp pháp'];
+const invalidWords = [
+  "phản động",
+  "hehe",
+  "bất hợp pháp",
+  "câu xyz",
+  "khiêu dâm",
+  "giết",
+];
 
 const postTestHandler = async (req, res) => {
   var reqBody = req.body;
   //console.log(reqBody)
   var test = reqBody.metadata;
   var questionList = reqBody.data;
-  console.log(req.jwtDecoded)
+  console.log(req.jwtDecoded);
   let msv = req.jwtDecoded.data.id;
-  
+
   test.TacGia = msv;
-  console.log('test: ', test)
-  console.log('questionList: ', questionList)
-  let data = {test, questionList}
+  console.log("test: ", test);
+  console.log("questionList: ", questionList);
+  let data = { test, questionList };
   let invalidWord = await containsInvalidWords(data, invalidWords);
-  console.log('chứa từ không phù hợp: ', invalidWord)
-  if(invalidWord.length > 0) {
+  console.log("chứa từ không phù hợp: ", invalidWord);
+  if (invalidWord.length > 0) {
     return res.status(200).json({
       code: 2,
       status: 200,
       message: "Tạo bài thi thất bại! Bài thi chứa từ không phù hợp",
-      data: invalidWord
-    })
+      data: invalidWord,
+    });
   }
-  var status = await createNewTest(test, questionList)
+  var status = await createNewTest(test, questionList);
   if (status) {
     res.status(200).json({
       code: 1,
       error: 200,
-      message: "Tạo bài thi thành công!"
-    })
-  }
-  else {
+      message: "Tạo bài thi thành công!",
+    });
+  } else {
     res.status(500).json({
       code: 0,
       status: 500,
-      message: "Tạo bài thi thất bại!"
-    })
+      message: "Tạo bài thi thất bại!",
+    });
   }
-}
+};
 
 const deleteTestHandler = async (req, res) => {
-  var testId = req.params.id
-  var status = await deleteTestById(testId)
+  var testId = req.params.id;
+  var status = await deleteTestById(testId);
   if (status) {
     res.status(200).json({
       code: 1,
       status: 200,
-      message: "Xóa thành công!"
-    })
-  }
-  else {
+      message: "Xóa thành công!",
+    });
+  } else {
     res.status(500).json({
       code: 0,
       status: 500,
-      message: "Xóa thất bại!"
-    })
+      message: "Xóa thất bại!",
+    });
   }
-}
+};
 
 const updateTestHandler = async (req, res) => {
-  var testId = req.params.id
-  var updateData = req.body
+  var testId = req.params.id;
+  var updateData = req.body;
   // //console.log(updateData)
-  var status = await updateTestById(testId, updateData)
+  var status = await updateTestById(testId, updateData);
   if (status) {
     res.status(200).json({
       code: 1,
       error: 200,
-      message: "Cập nhật thành công!"
-    })
-  }
-  else {
+      message: "Cập nhật thành công!",
+    });
+  } else {
     res.status(500).json({
       code: 0,
-      message: "Cập nhật thất bại!"
-    })
+      message: "Cập nhật thất bại!",
+    });
   }
-}
+};
 
 const searchTestHandler = async (req, res) => {
-  var name = req.query.text
-  var tests = await searchTestByName(name)
+  var name = req.query.text;
+  var tests = await searchTestByName(name);
   if (tests.status === 200) {
     const response = {
       code: 1,
       status: 200,
       message: "successfully",
-      data: tests.data
+      data: tests.data,
     };
 
     res.status(200).json(response);
-  }
-  else if (tests.status === 404) {
+  } else if (tests.status === 404) {
     const response = {
       code: 0,
       status: 404,
@@ -412,8 +418,7 @@ const searchTestHandler = async (req, res) => {
     };
 
     res.status(404).json(response);
-  }
-  else if (tests.status === 500) {
+  } else if (tests.status === 500) {
     const response = {
       code: 0,
       status: 500,
@@ -422,7 +427,7 @@ const searchTestHandler = async (req, res) => {
 
     res.status(500).json(response);
   }
-}
+};
 
 const getTestWithStudent = async (req, res) => {
   const id = req.params.id;
@@ -438,35 +443,43 @@ const getTestWithStudent = async (req, res) => {
 
 const postSubmit = async (req, res) => {
   let msv = req.jwtDecoded.data.id;
-  var reqBody = req.body
+  var reqBody = req.body;
   //console.log(reqBody)
-  var test = reqBody.metadata
-  var questionList = reqBody.dataoption
+  var test = reqBody.metadata;
+  var questionList = reqBody.dataoption;
 
-  var result = await createNewResult(msv, test[0], questionList)
+  var result = await createNewResult(msv, test[0], questionList);
   if (result) {
     res.status(200).json({
       code: 1,
       error: 200,
       message: "Tạo thành công!",
-      data: result
-    })
-  }
-  else {
+      data: result,
+    });
+  } else {
     res.status(500).json({
       code: 0,
       status: 500,
-      message: "Tạo thất bại!"
-
-    })
+      message: "Tạo thất bại!",
+    });
   }
-}
+};
 
 module.exports = {
-  getTestList, getQuestionByTestHandler, postTestHandler, deleteTestHandler, updateTestHandler, searchTestHandler,
-  getTestWithStudent, getResultList, getDetailList, postTestHandler, getQuestionHandlernoAns, postSubmit, getTestByPage, getSearchTest,
-  getProbByPage,getTestByIdHandler
-}
-
-
-
+  getTestList,
+  getQuestionByTestHandler,
+  postTestHandler,
+  deleteTestHandler,
+  updateTestHandler,
+  searchTestHandler,
+  getTestWithStudent,
+  getResultList,
+  getDetailList,
+  postTestHandler,
+  getQuestionHandlernoAns,
+  postSubmit,
+  getTestByPage,
+  getSearchTest,
+  getProbByPage,
+  getTestByIdHandler,
+};

@@ -98,6 +98,33 @@ const EditTest = async (req, res) => {
   });
 };
 
+const UserEditTest = async (req, res) => {
+  const testId = req.params.id;
+  // //console.log("id: ", testId);
+  var metadata = await getTestById(testId);
+  var questions = await getQuestionOfTest(testId);
+
+  const startTime = metadata.data[0].ThoiGianBatDau;
+
+  const datetimeString = startTime.toISOString();
+
+  const datePart = datetimeString.split("T")[0];
+  const timePart = datetimeString.split("T")[1].split(".")[0];
+
+  // //console.log(metadata.data[0].MaBaiThi)
+  metadata.data[0].date = datePart;
+  metadata.data[0].time = timePart;
+  // //console.log(metadata[0].MaBaiThi);
+
+  var list = questions.data;
+
+  res.render("user/pages/viewTest/editTest.pug", {
+    titlePage: "Chỉnh sửa bài thi",
+    metadata: metadata.data[0],
+    questions: list,
+  });
+};
+
 const testListPaginateUser = async (req, res) => {
   let msv = req.jwtDecoded.data.id;
   console.log(msv);
@@ -151,6 +178,7 @@ module.exports = {
   createNewTest,
   createNewTestUser,
   EditTest,
+  UserEditTest,
   testListPaginate,
   testListPaginateUser,
 };
